@@ -1,44 +1,27 @@
-#include "raylib.h"
-
-void bruh(void) { }
+#include <raylib.h>
+#include "globals.h"
 
 int main(void)
 {
-	// Initialization
-	//--------------------------------------------------------------------------------------
-	const int screenWidth = 800;
-	const int screenHeight = 450;
+	InitWindow(screenWidth, screenHeight, "Geometry Slash");
 
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
-	SetTargetFPS(60);			   // Set our game to run at 60 frames-per-second
-	//--------------------------------------------------------------------------------------
+	SetTargetFPS(60);
 
 	// Main game loop
-	while (!WindowShouldClose())	// Detect window close button or ESC key
+	while (!WindowShouldClose())
 	{
 		// Update
-		//----------------------------------------------------------------------------------
-		// TODO: Update your variables here
-		//----------------------------------------------------------------------------------
 
-		// Draw
-		//----------------------------------------------------------------------------------
 		BeginDrawing();
 
-		ClearBackground(RAYWHITE);
+			ClearBackground(RAYWHITE);
 
-		DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-		DrawRectangle(0, 0, 100, 100, RED);
+			DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
 
 		EndDrawing();
-		//----------------------------------------------------------------------------------
 	}
 
-	// De-Initialization
-	//--------------------------------------------------------------------------------------
-	CloseWindow();		// Close window and OpenGL context
-	//--------------------------------------------------------------------------------------
+	CloseWindow();
 
 	return 0;
 }
