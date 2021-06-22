@@ -1,9 +1,23 @@
 #include <raylib.h>
 #include "globals.h"
 
+Texture2D Sprites;
+
+void LoadAssets(void)
+{
+	Sprites = LoadTexture("../assets/Geometry_Slash_Sprites.png");
+}
+
+void UnloadAssets(void)
+{
+	UnloadTexture(Sprites);
+}
+
 int main(void)
 {
 	InitWindow(screenWidth, screenHeight, "Geometry Slash");
+
+	LoadAssets();
 
 	SetTargetFPS(60);
 
@@ -15,13 +29,13 @@ int main(void)
 		BeginDrawing();
 
 			ClearBackground(RAYWHITE);
-
-			DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+			DrawTexture(Sprites, 0, 0, WHITE);
 
 		EndDrawing();
 	}
 
-	CloseWindow();
+	UnloadAssets();
 
+	CloseWindow();
 	return 0;
 }
