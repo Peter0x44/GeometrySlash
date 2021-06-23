@@ -26,16 +26,14 @@ void DrawBoard(void)
 	board.bounds.width = gridWidth;
 	DrawRectangleLinesEx(board.bounds, 4.0f, BLACK);
 	Rectangle TextureBounds;
-	Rectangle Destination;
-	TextureBounds.height = 32;
-	TextureBounds.width = 32;
-	Destination.height = 32 * 1.5f;
-	Destination.height = 32 * 1.5f;
+	Vector2 TileDest;
+	TextureBounds.height = 48;
+	TextureBounds.width = 48;
+	TileDest.x = 48 * 1.5f;
+	TileDest.y = 48 * 1.5f;
 
 	for (int i = 0; i < 7; ++i)
 	{
-		//DrawLineEx(Vector2{ board.bounds.x, board.bounds.y}, Vector2 { board.bounds.x+board.bounds.height, board.bounds.y/*+board.bounds.width*/}, 4.0f, BLACK);
-		//DrawLineEx(Vector2{ board.bounds.x, board.bounds.y}, Vector2 { board.bounds.x/*+board.bounds.height*/, board.bounds.y+board.bounds.width}, 4.0f, BLACK);
 		for (int j = 0; j < 7; ++j)
 		{
 			switch (board.cells[i][j].color)
@@ -44,10 +42,10 @@ void DrawBoard(void)
 					TextureBounds.x = 0;
 					break;
 				case Colors::Yellow:
-					TextureBounds.x = 32;
+					TextureBounds.x = 48;
 					break;
 				case Colors::Blue:
-					TextureBounds.x = 64;
+					TextureBounds.x = 96;
 					break;
 			}
 			switch (board.cells[i][j].shape)
@@ -56,55 +54,49 @@ void DrawBoard(void)
 					TextureBounds.y = 0;
 					break;
 				case Shapes::Circle:
-					TextureBounds.y = 32;
+					TextureBounds.y = 48;
 					break;
 				case Shapes::Triangle:
-					TextureBounds.y = 64;
+					TextureBounds.y = 96;
 					break;
 			}
-			Destination.x = gridOffsetX + 4 + 32*i;
-			Destination.y = gridOffsetY + 4 + 32*j;
-			//DrawTextureTiled(tiles, TextureBounds, Destination, Vector2{TextureBounds.y+16, TextureBounds.x+16}, 0.0f, 1.5f, WHITE);
-			//DrawTexturePro(tiles, TextureBounds, Destination, Vector2{TextureBounds.y, TextureBounds.x}, 0.0f, 1.5f, WHITE)
+			TileDest.x = gridOffsetX + 6*(i+1) + 48*i;
+			TileDest.y = gridOffsetY + 6*(j+1) + 48*j;
+			DrawTextureRec(tiles, TextureBounds, TileDest, WHITE);
 		}
 	}
 
-//	DrawRectangle(board.bounds, BLACK);
-//			DrawTextureEx(Sprites, Vector2{GetScreenWidth()/2-Sprites.width, GetScreenHeight()/2-Sprites.width}, 0 , 2.0f, WHITE);
-//	DrawTextureEx(Sprites, Vector2{GetMouseX(), GetMouseY()}, 0, 1.5f, WHITE);
-//	DrawTextureEx(Sprites, Vector2{GetMouseX()+Sprites.height, GetMouseY()}, 0, 1.5f, WHITE);
-//	DrawTextureEx(Sprites, Vector2{GetMouseX()+Sprites.height*2, GetMouseY()}, 0, 1.5f, WHITE);
+
 
 }
 
 int main(void)
 {
-//	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	InitWindow(screenWidth, screenHeight, "Geometry Slash");
 
 	LoadAssets();
 
 	SetTargetFPS(60);
 
-	//for (int i = 0; i < 7; ++i)
-	//{
-	//	for (int j = 0; j < 7; ++j)
-	//	{
-	//		board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 2));
-	//		board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 2));
-	//	}
-	//}
+	for (int i = 0; i < 7; ++i)
+	{
+		for (int j = 0; j < 7; ++j)
+		{
+			board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 2));
+			board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 2));
+		}
+	}
 
 	// Main game loop
 	while (!WindowShouldClose())
 	{
 		// Update variables here
-
+		 gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
+		 gridOffsetY = GetScreenHeight()/2 - gridHeight/2;
 		BeginDrawing();
 
-			DrawText("Bruh", 0, 0, 12, RED);
-			DrawTexture(tiles, 0, 0, WHITE);
-			//DrawBoard();
+			DrawBoard();
 			ClearBackground(RAYWHITE);
 			
 
