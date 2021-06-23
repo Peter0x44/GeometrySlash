@@ -6,11 +6,7 @@ Board board;
 
 void LoadAssets(void)
 {
-	Image tmp = LoadImage("assets/Tiles.png");
-	Image* bruh = &tmp;
-        ImageResize(bruh, 48*3, 48*3);
-	tiles = LoadTextureFromImage(tmp);
-	//tiles = LoadTexture("assets/Tiles.png");
+	tiles = LoadTexture("assets/Tiles.png");
 }
 
 void UnloadAssets(void)
@@ -26,11 +22,11 @@ void DrawBoard(void)
 	board.bounds.width = gridWidth;
 	DrawRectangleLinesEx(board.bounds, 4.0f, BLACK);
 	Rectangle TextureBounds;
-	Vector2 TileDest;
-	TextureBounds.height = 48;
-	TextureBounds.width = 48;
-	TileDest.x = 48 * 1.5f;
-	TileDest.y = 48 * 1.5f;
+	TextureBounds.height = 32;
+	TextureBounds.width = 32;
+	Rectangle TileDest;
+	TileDest.width = 48;
+	TileDest.height = 48;
 
 	for (int i = 0; i < 7; ++i)
 	{
@@ -42,10 +38,10 @@ void DrawBoard(void)
 					TextureBounds.x = 0;
 					break;
 				case Colors::Yellow:
-					TextureBounds.x = 48;
+					TextureBounds.x = 32;
 					break;
 				case Colors::Blue:
-					TextureBounds.x = 96;
+					TextureBounds.x = 64;
 					break;
 			}
 			switch (board.cells[i][j].shape)
@@ -54,15 +50,15 @@ void DrawBoard(void)
 					TextureBounds.y = 0;
 					break;
 				case Shapes::Circle:
-					TextureBounds.y = 48;
+					TextureBounds.y = 32;
 					break;
 				case Shapes::Triangle:
-					TextureBounds.y = 96;
+					TextureBounds.y = 64;
 					break;
 			}
 			TileDest.x = gridOffsetX + 6*(i+1) + 48*i;
 			TileDest.y = gridOffsetY + 6*(j+1) + 48*j;
-			DrawTextureRec(tiles, TextureBounds, TileDest, WHITE);
+			DrawTexturePro(tiles, TextureBounds, TileDest, Vector2{0,0}, 0.0f, WHITE);
 		}
 	}
 
@@ -98,7 +94,6 @@ int main(void)
 
 			DrawBoard();
 			ClearBackground(RAYWHITE);
-			
 
 
 		EndDrawing();
