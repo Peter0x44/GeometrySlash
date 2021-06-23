@@ -6,8 +6,11 @@
 constexpr int screenWidth = 640;
 constexpr int screenHeight = 480;
 
-constexpr int gridHeight = 52*7;
-constexpr int gridWidth = 52*7;
+constexpr int gridHeight = 32*7 + 4*8;
+constexpr int gridWidth = 32*7 + 4*8;
+
+constexpr int gridOffsetX = screenWidth/2 - gridWidth/2;
+constexpr int gridOffsetY = screenHeight/2 - gridHeight/2;
 
 enum class Shapes
 {
@@ -41,6 +44,6 @@ struct Board
 
 extern Board board;
 
-extern Texture2D sprites;
+extern Texture2D tiles;
 
 #endif

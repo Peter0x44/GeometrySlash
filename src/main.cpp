@@ -1,41 +1,41 @@
 #include <iostream>
 #include <raylib.h>
 #include "globals.h"
-#include "../assets/bruh.h"
-
-Texture2D sprites;
+Texture2D tiles;
 Board board;
 
 void LoadAssets(void)
 {
-	sprites = LoadTexture("../assets/Geometry_Slash_Sprites.png");
+	Image tmp = LoadImage("assets/Tiles.png");
+	Image* bruh = &tmp;
+        ImageResize(bruh, 48*3, 48*3);
+	tiles = LoadTextureFromImage(tmp);
+	//tiles = LoadTexture("assets/Tiles.png");
 }
 
 void UnloadAssets(void)
 {
-	UnloadTexture(sprites);
+	UnloadTexture(tiles);
 }
 
 void DrawBoard(void)
 {
-	board.bounds.x = GetMouseX();
-	board.bounds.y = GetMouseY();
+	board.bounds.x = gridOffsetX;
+	board.bounds.y = gridOffsetY;
 	board.bounds.height = gridHeight;
 	board.bounds.width = gridWidth;
-//	DrawRectangleLinesEx(board.bounds, 4.0f, BLACK);
+	DrawRectangleLinesEx(board.bounds, 4.0f, BLACK);
 	Rectangle TextureBounds;
 	Rectangle Destination;
 	TextureBounds.height = 32;
 	TextureBounds.width = 32;
 	Destination.height = 32 * 1.5f;
 	Destination.height = 32 * 1.5f;
-	Destination.x = GetMouseX();
-	Destination.y = GetMouseY();
 
 	for (int i = 0; i < 7; ++i)
 	{
-		DrawLineEx(Vector2{ board.bounds.x, board.bounds.y}, Vector2 { board.bounds.x+board.bounds.height, board.bounds.y/*+board.bounds.width*/}, 4.0f, BLACK);
-		DrawLineEx(Vector2{ board.bounds.x, board.bounds.y}, Vector2 { board.bounds.x/*+board.bounds.height*/, board.bounds.y+board.bounds.width}, 4.0f, BLACK);
+		//DrawLineEx(Vector2{ board.bounds.x, board.bounds.y}, Vector2 { board.bounds.x+board.bounds.height, board.bounds.y/*+board.bounds.width*/}, 4.0f, BLACK);
+		//DrawLineEx(Vector2{ board.bounds.x, board.bounds.y}, Vector2 { board.bounds.x/*+board.bounds.height*/, board.bounds.y+board.bounds.width}, 4.0f, BLACK);
 		for (int j = 0; j < 7; ++j)
 		{
 			switch (board.cells[i][j].color)
@@ -62,8 +62,10 @@ void DrawBoard(void)
 					TextureBounds.y = 64;
 					break;
 			}
-			DrawTextureTiled(sprites, TextureBounds, Destination, Vector2{TextureBounds.y+16, TextureBounds.x+16}, 0.0f, 1.5f, WHITE);
-			DrawTexture(sprites, GetMouseX()+4, GetMouseY()+4, WHITE);
+			Destination.x = gridOffsetX + 4 + 32*i;
+			Destination.y = gridOffsetY + 4 + 32*j;
+			//DrawTextureTiled(tiles, TextureBounds, Destination, Vector2{TextureBounds.y+16, TextureBounds.x+16}, 0.0f, 1.5f, WHITE);
+			//DrawTexturePro(tiles, TextureBounds, Destination, Vector2{TextureBounds.y, TextureBounds.x}, 0.0f, 1.5f, WHITE)
 		}
 	}
 
@@ -84,14 +86,14 @@ int main(void)
 
 	SetTargetFPS(60);
 
-	for (int i = 0; i < 7; ++i)
-	{
-		for (int j = 0; j < 7; ++j)
-		{
-			board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 3));
-			board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 3));
-		}
-	}
+	//for (int i = 0; i < 7; ++i)
+	//{
+	//	for (int j = 0; j < 7; ++j)
+	//	{
+	//		board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 2));
+	//		board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 2));
+	//	}
+	//}
 
 	// Main game loop
 	while (!WindowShouldClose())
@@ -100,9 +102,12 @@ int main(void)
 
 		BeginDrawing();
 
-			DrawBoard();
-
+			DrawText("Bruh", 0, 0, 12, RED);
+			DrawTexture(tiles, 0, 0, WHITE);
+			//DrawBoard();
 			ClearBackground(RAYWHITE);
+			
+
 
 		EndDrawing();
 	}
