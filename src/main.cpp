@@ -7,6 +7,7 @@ Board board;
 void LoadAssets(void)
 {
 	tiles = LoadTexture("assets/Tiles.png");
+	SetTextureFilter(tiles, TEXTURE_FILTER_POINT);
 }
 
 void UnloadAssets(void)
@@ -32,30 +33,8 @@ void DrawBoard(void)
 	{
 		for (int j = 0; j < 7; ++j)
 		{
-			switch (board.cells[i][j].color)
-			{
-				case Colors::Red:
-					TextureBounds.x = 0;
-					break;
-				case Colors::Yellow:
-					TextureBounds.x = 32;
-					break;
-				case Colors::Blue:
-					TextureBounds.x = 64;
-					break;
-			}
-			switch (board.cells[i][j].shape)
-			{
-				case Shapes::Square:
-					TextureBounds.y = 0;
-					break;
-				case Shapes::Circle:
-					TextureBounds.y = 32;
-					break;
-				case Shapes::Triangle:
-					TextureBounds.y = 64;
-					break;
-			}
+			TextureBounds.x = 32 * static_cast<int>(board.cells[i][j].color);
+			TextureBounds.y = 32 * static_cast<int>(board.cells[i][j].shape);
 			TileDest.x = gridOffsetX + 6*(i+1) + 48*i;
 			TileDest.y = gridOffsetY + 6*(j+1) + 48*j;
 			DrawTexturePro(tiles, TextureBounds, TileDest, Vector2{0,0}, 0.0f, WHITE);
@@ -79,8 +58,8 @@ int main(void)
 	{
 		for (int j = 0; j < 7; ++j)
 		{
-			board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 2));
-			board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 2));
+			board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 4));
+			board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 4));
 		}
 	}
 
@@ -88,8 +67,8 @@ int main(void)
 	while (!WindowShouldClose())
 	{
 		// Update variables here
-		 gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
-		 gridOffsetY = GetScreenHeight()/2 - gridHeight/2;
+		gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
+		gridOffsetY = GetScreenHeight()/2 - gridHeight/2;
 		BeginDrawing();
 
 			DrawBoard();

@@ -16,19 +16,23 @@ enum class Shapes
 {
 	Square,
 	Circle,
-	Triangle
+	Triangle,
+	Rhombus,
+	Heart
 };
 
 enum class Colors
 {
 	Red,
 	Yellow,
-	Blue
+	Blue,
+	Green,
+	Orange
 };
 
 
 // Enum value also corresponds to position in texture atlas
-// i.e atlas[2][1] == blue circle
+// i.e atlas[2*cellsize][1*cellsize] == blue circle
 
 struct Tile
 {
