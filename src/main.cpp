@@ -26,7 +26,8 @@ int main(void)
 	// Main game loop
 	while (!WindowShouldClose())
 	{
-		// Update variables here
+		CurrentState->logic();
+
 		BeginDrawing();
 
 			ClearBackground(RAYWHITE);
