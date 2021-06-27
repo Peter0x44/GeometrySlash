@@ -43,21 +43,21 @@ void InGame::DrawBoard(void)
 	board.bounds.width = gridWidth;
 	DrawRectangleLinesEx(board.bounds, 4.0f, BLACK);
 	Rectangle TextureBounds;
-	TextureBounds.height = 32;
-	TextureBounds.width = 32;
+	TextureBounds.height = spriteSizeAtlas;
+	TextureBounds.width = spriteSizeAtlas;
 	Rectangle TileDest;
-	TileDest.width = 48;
-	TileDest.height = 48;
+	TileDest.width = spriteSize;
+	TileDest.height = spriteSize;
 
 	for (int i = 0; i < 7; ++i)
 	{
 		for (int j = 0; j < 7; ++j)
 		{
-			TextureBounds.x = 32 * static_cast<int>(board.cells[i][j].color);
-			TextureBounds.y = 32 * static_cast<int>(board.cells[i][j].shape);
+			TextureBounds.x = spriteSizeAtlas * static_cast<int>(board.cells[i][j].color);
+			TextureBounds.y = spriteSizeAtlas * static_cast<int>(board.cells[i][j].shape);
 			// Enum values also correspond to position in texture atlas
-			TileDest.x = gridOffsetX + 6*(i+1) + 48*i;
-			TileDest.y = gridOffsetY + 6*(j+1) + 48*j;
+			TileDest.x = gridOffsetX + paddingSize*(i+1) + spriteSize*i;
+			TileDest.y = gridOffsetY + paddingSize*(j+1) + spriteSize*j;
 			DrawTexturePro(tiles, TextureBounds, TileDest, Vector2{0,0}, 0.0f, WHITE);
 		}
 	}

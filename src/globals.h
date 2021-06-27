@@ -7,6 +7,7 @@
 constexpr int screenWidth = 640;
 constexpr int screenHeight = 480;
 
+constexpr int spriteSizeAtlas = 32;
 constexpr int spriteSize = 48;
 constexpr int paddingSize = 6;
 
