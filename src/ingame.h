@@ -50,6 +50,9 @@ public:
 private:
 	void DrawBoard(void);
 	Board board;
+	int cursorY, cursorX;
+	int gridOffsetX;
+	int gridOffsetY;
 };
 
 #endif
