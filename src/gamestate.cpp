@@ -13,10 +13,9 @@ void ChangeState(void)
 
 		switch (NextState)
 		{
-//			case GameStates::MainMenu:
-//				CurrentState = new MainMenu();
-//				break;
-// TODO fill out when main menu is implemented
+			case GameStates::MainMenu:
+				CurrentState = new MainMenu();
+				break;
 			case GameStates::InGame:
 				CurrentState = new InGame();
 				break;
