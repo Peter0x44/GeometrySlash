@@ -3,6 +3,7 @@
 #include "globals.h"
 #include "gamestate.h"
 #include "ingame.h"
+#include "mainmenu.h"
 
 Texture2D tiles;
 
@@ -21,7 +22,7 @@ int main(void)
 
 	LoadAssets();
 
-	CurrentState = new InGame();
+	CurrentState = new MainMenu();
 
 	// Main game loop
 	while (!WindowShouldClose())
@@ -34,6 +35,7 @@ int main(void)
 			CurrentState->render();
 
 		EndDrawing();
+		ChangeState();
 	}
 
 	UnloadAssets();
