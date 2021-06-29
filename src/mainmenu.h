@@ -11,12 +11,12 @@ struct scroller
 	Rectangle source;
 	scroller(void)
 	{
-		dest.x = -32;
-		dest.y = 0;
-		source.x = GetRandomValue(0, 4) * 32;
-		source.y = GetRandomValue(0, 4) * 32;
+		dest.x = -spriteSize;
+		dest.y = GetScreenHeight()/3;
+		source.x = GetRandomValue(0, 4) * spriteSizeAtlas;
+		source.y = GetRandomValue(0, 4) * spriteSizeAtlas;
 		source.height = source.width = spriteSizeAtlas;
-		dest.height = dest.width = spriteSizeAtlas;
+		dest.height = dest.width = spriteSize;
 	}
 };
 

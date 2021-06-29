@@ -7,7 +7,7 @@ void MainMenu::logic(void)
 	TitleFontSize = GetScreenHeight()/10;
 	TitleDims = MeasureTextEx(GetFontDefault(), "Geometry Slash", TitleFontSize, TitleFontSize/10);
 	TitlePos.x = GetScreenWidth()/2 - TitleDims.x/2;
-	TitlePos.y = GetScreenHeight()/4 - TitleDims.y/2;
+	TitlePos.y = GetScreenHeight()/5 - TitleDims.y/2;
 
 	//Determine size and position of Start button and text
 	StartButton.width = (GetScreenWidth()/6)*4;
@@ -25,9 +25,9 @@ void MainMenu::logic(void)
 
 	static int frameCount;
 
-	if (!(frameCount % 32))
+	if (!(frameCount % (spriteSize*2 / scrollSpeed)))
 	{
-		// Add new shape to queue every 32 frames
+		// Add new shape to queue every sprite size * 2 frames (therefore leaving a gap of one sprite between them) and divide by speed modifier 
 		scroller scroll;
 		q.push_back(scroll);
 	}
@@ -40,8 +40,8 @@ void MainMenu::logic(void)
 
 	for (scroller& scroller: q)
 	{
-		scroller.dest.x += 1.0f;
-		// Move every shape by one pixel
+		scroller.dest.x += scrollSpeed;
+		// Move every shape by scrollSpeed pixels every frame
 	}
 
 	++frameCount;

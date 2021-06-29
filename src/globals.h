@@ -16,6 +16,8 @@ constexpr int gridWidth = spriteSize*7 + paddingSize*8;
 
 constexpr int cellSize = spriteSize + paddingSize;
 
+constexpr int scrollSpeed = 2; //pixels per frame advance of scrolling sprites
+
 extern Texture2D tiles;
 
 #endif
