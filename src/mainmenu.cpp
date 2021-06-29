@@ -18,15 +18,45 @@ void MainMenu::logic(void)
 	StartPos.x = GetScreenWidth()/2 - StartDims.x/2;
 	StartPos.y = (GetScreenHeight()/3)*2 - StartDims.y/2;
 
-	if (CheckCollisionPointRec(GetMousePosition(), StartButton) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT)){
+	if (CheckCollisionPointRec(GetMousePosition(), StartButton) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	{
 		SetNextState(GameStates::InGame);
 	}
+
+	static int frameCount;
+
+	if (!(frameCount % 32))
+	{
+		// Add new shape to queue every 32 frames
+		scroller scroll;
+		q.push_back(scroll);
+	}
+
+	if (q.front().dest.x > GetScreenWidth())
+	{
+		q.pop_front();
+		// Delete from queue if the front shape goes offscreen
+	}
+
+	for (scroller& scroller: q)
+	{
+		scroller.dest.x += 1.0f;
+		// Move every shape by one pixel
+	}
+
+	++frameCount;
 }
 
 void MainMenu::render(void)
 {
+	ClearBackground(DARKGRAY);
 	DrawText("Geometry Slash", TitlePos.x, TitlePos.y, TitleFontSize, RED);	
 	DrawRectangleRounded(StartButton, 0.5f, 0, LIGHTGRAY);
 	DrawText("Start", StartPos.x, StartPos.y, TitleFontSize, BLACK);
-	
+
+	// Draw all shapes in scrolling line
+	for (const scroller& bruh: q)
+	{
+		DrawTexturePro(tiles, bruh.source, bruh.dest, Vector2{0,0}, 0.0f, WHITE);
+	}
 } 
