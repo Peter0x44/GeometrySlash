@@ -13,6 +13,7 @@ constexpr int paddingSize = 6;
 
 constexpr int gridHeight = spriteSize*7 + paddingSize*8;
 constexpr int gridWidth = spriteSize*7 + paddingSize*8;
+constexpr int gridBorder = 4;
 
 constexpr int cellSize = spriteSize + paddingSize;
 

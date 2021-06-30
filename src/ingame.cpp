@@ -14,7 +14,7 @@ void InGame::logic(void)
 	cursorY = GetMouseY();
 	if (cursorX < gridOffsetX) // Cursor is outside of the grid
 		cursorX = 0;
-	else if (cursorX > gridOffsetX + gridHeight)
+	else if (cursorX > gridOffsetX + gridHeight - gridBorder*2)
 		cursorX = 6;
 	else
 		cursorX = (cursorX-gridOffsetX) / cellSize;
@@ -22,7 +22,7 @@ void InGame::logic(void)
 
 	if (cursorY < gridOffsetY)
 		cursorY = 0;
-	else if (cursorY > gridOffsetY + gridHeight)
+	else if (cursorY > gridOffsetY + gridHeight - gridBorder*2)
 		cursorY = 6;
 	else
 		cursorY = (cursorY-gridOffsetY) / cellSize;
@@ -82,8 +82,8 @@ void InGame::DrawChainLines(void)
 {
 	for (size_t i = 0; i < Chain.size()-1; ++i)
 	{
-		Vector2 currentPoint = Vector2{ Chain.at(i).x, Chain.at(i).y };
-		Vector2 nextPoint = Vector2{ Chain.at(i+1).x+1, Chain.at(i+1).y+1};
+		Vector2 currentPoint = Vector2{ (float)Chain.at(i).x, (float)Chain.at(i).y };
+		Vector2 nextPoint = Vector2{ (float)Chain.at(i+1).x+1, (float)Chain.at(i+1).y+1};
 		currentPoint.x = gridOffsetX + (currentPoint.x * cellSize) + paddingSize + spriteSize/2;
 		currentPoint.y = gridOffsetY + (currentPoint.y * cellSize) + paddingSize + spriteSize/2;
 		nextPoint.x = gridOffsetX + ((nextPoint.x-1) * cellSize) + paddingSize + spriteSize/2;
@@ -101,7 +101,7 @@ void InGame::DrawBoard(void)
 	board.bounds.y = gridOffsetY;
 	board.bounds.height = gridHeight;
 	board.bounds.width = gridWidth;
-	DrawRectangleLinesEx(board.bounds, 4.0f, BLACK);
+	DrawRectangleLinesEx(board.bounds,(float)gridBorder, BLACK);
 	Rectangle TextureBounds;
 	TextureBounds.height = spriteSizeAtlas;
 	TextureBounds.width = spriteSizeAtlas;
