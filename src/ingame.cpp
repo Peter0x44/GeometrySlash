@@ -6,8 +6,9 @@
 
 void InGame::logic(void)
 {
+	// Logic for determining hovered tile
 	gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
-	gridOffsetY = GetScreenHeight()/2 - gridHeight/2;
+	gridOffsetY = GetScreenHeight()/2 - gridHeight/2;	
 	// Calculate the position of the corner of the grid
 	cursorX = GetMouseX();
 	cursorY = GetMouseY();
@@ -25,6 +26,26 @@ void InGame::logic(void)
 		cursorY = 6;
 	else
 		cursorY = (cursorY-gridOffsetY) / cellSize;
+
+	
+	//Logic for chain selection
+	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	{
+		if (Chain.empty()) 
+			Chain.push_back(bruh{cursorX, cursorY});
+		else if ((Chain.back().x != cursorX) || (Chain.back().y != cursorY))
+			Chain.push_back(bruh{cursorX, cursorY});
+
+	}
+	else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) Chain.clear(); 
+	//clear chain if mouse is released
+
+	int position = 0;
+	for (const bruh& i:Chain) 
+	{
+		std::cout << "Chain[" << position << "] .x: " << i.x << " .y:" << i.y << std::endl;
+		++position;
+	}
 }
 
 void InGame::render(void)

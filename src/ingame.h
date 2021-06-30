@@ -1,6 +1,9 @@
 #ifndef INGAME_H
 #define INGAME_H
 
+#include <vector>
+#include <array>
+
 #include "gamestate.h"
 #include "globals.h"
 
@@ -38,6 +41,12 @@ struct Board
 	std::array<std::array<Tile, 7>, 7> cells;
 };
 
+struct bruh
+{
+	int x;
+	int y;
+};
+
 class InGame: public GameState
 {
 public:
@@ -51,6 +60,7 @@ private:
 	int cursorY, cursorX;
 	int gridOffsetX;
 	int gridOffsetY;
+	std::vector<bruh> Chain;
 };
 
 #endif
