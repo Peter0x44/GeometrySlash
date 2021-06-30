@@ -2,6 +2,7 @@
 #define INGAME_H
 
 #include "gamestate.h"
+#include "globals.h"
 
 enum class Shapes
 {
@@ -36,9 +37,6 @@ struct Board
 	Rectangle bounds;
 	std::array<std::array<Tile, 7>, 7> cells;
 };
-
-extern Texture2D tiles;
-
 
 class InGame: public GameState
 {
