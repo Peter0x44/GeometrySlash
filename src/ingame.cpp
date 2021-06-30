@@ -35,6 +35,11 @@ void InGame::logic(void)
 		{
 			Chain.push_back(bruh{cursorX, cursorY});
 		}
+		else if ((Chain.end()[-2].x == cursorX && Chain.end()[-2].y == cursorY) && (Chain.size() > 1)) 
+		//if you hover over the second to last cell, pop it from the chain. Effectively, this allows going backwards.
+		{
+			Chain.pop_back();
+		}
 		else
 		{
 			bool found = false;
