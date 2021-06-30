@@ -56,6 +56,7 @@ public:
 	InGame(void);
 private:
 	void DrawBoard(void);
+	void DrawChainLines(void);
 	Board board;
 	int cursorY, cursorX;
 	int gridOffsetX;

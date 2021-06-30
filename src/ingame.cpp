@@ -60,7 +60,7 @@ void InGame::logic(void)
 	//clear chain if mouse is released
 
 	int position = 0;
-	for (const bruh& i:Chain) 
+	for (const bruh& i: Chain)
 	{
 		std::cout << "Chain[" << position << "] .x: " << i.x << " .y:" << i.y << std::endl;
 		++position;
@@ -70,8 +70,28 @@ void InGame::logic(void)
 void InGame::render(void)
 {
 	DrawBoard();
+
+	if (!Chain.empty())
+	{
+		DrawChainLines();
+	}
 }
 
+
+void InGame::DrawChainLines(void)
+{
+	for (size_t i = 0; i < Chain.size()-1; ++i)
+	{
+		Vector2 currentPoint = Vector2{ Chain.at(i).x, Chain.at(i).y };
+		Vector2 nextPoint = Vector2{ Chain.at(i+1).x+1, Chain.at(i+1).y+1};
+		currentPoint.x = gridOffsetX + (currentPoint.x * cellSize) + paddingSize + spriteSize/2;
+		currentPoint.y = gridOffsetY + (currentPoint.y * cellSize) + paddingSize + spriteSize/2;
+		nextPoint.x = gridOffsetX + ((nextPoint.x-1) * cellSize) + paddingSize + spriteSize/2;
+		nextPoint.y = gridOffsetY + ((nextPoint.y-1) * cellSize) + paddingSize + spriteSize/2;
+
+		DrawLineEx(currentPoint, nextPoint, 4.0f, BLACK);
+	}
+}
 
 
 
