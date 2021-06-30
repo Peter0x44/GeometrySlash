@@ -31,13 +31,27 @@ void InGame::logic(void)
 	//Logic for chain selection
 	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 	{
-		if (Chain.empty()) 
+		if (Chain.empty())
+		{
 			Chain.push_back(bruh{cursorX, cursorY});
-		else if ((Chain.back().x != cursorX) || (Chain.back().y != cursorY))
-			Chain.push_back(bruh{cursorX, cursorY});
-
-	}
-	else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) Chain.clear(); 
+		}
+		else
+		{
+			bool found = false;
+			for (const bruh& i: Chain)
+			{
+				if (i.x == cursorX && i.y == cursorY)
+				{
+					found = true;
+				}
+			}
+			// Only add to chain if the X and Y coordinates are not already present
+			if (!found)
+			{
+				Chain.push_back(bruh{cursorX, cursorY});
+			}
+		}
+	} else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) Chain.clear();
 	//clear chain if mouse is released
 
 	int position = 0;
