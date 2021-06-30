@@ -38,10 +38,14 @@ void MainMenu::logic(void)
 		// Delete from queue if the front shape goes offscreen
 	}
 
+	int y = GetScreenHeight()/3;
+
 	for (scroller& scroller: q)
 	{
 		scroller.dest.x += scrollSpeed;
 		// Move every shape by scrollSpeed pixels every frame
+		scroller.dest.y = y;
+		// Set Y position of all of them, so it the positions stay correct when the window is resized
 	}
 
 	++frameCount;

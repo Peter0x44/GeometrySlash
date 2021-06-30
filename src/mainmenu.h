@@ -12,7 +12,6 @@ struct scroller
 	scroller(void)
 	{
 		dest.x = -spriteSize;
-		dest.y = GetScreenHeight()/3;
 		source.x = GetRandomValue(0, 4) * spriteSizeAtlas;
 		source.y = GetRandomValue(0, 4) * spriteSizeAtlas;
 		source.height = source.width = spriteSizeAtlas;
