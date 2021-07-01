@@ -53,7 +53,6 @@ void MainMenu::logic(void)
 
 void MainMenu::render(void)
 {
-	ClearBackground(DARKGRAY);
 	DrawText("Geometry Slash", TitlePos.x, TitlePos.y, TitleFontSize, RED);	
 	DrawRectangleRounded(StartButton, 0.5f, 0, LIGHTGRAY);
 	DrawText("Start", StartPos.x, StartPos.y, TitleFontSize, BLACK);
