@@ -52,7 +52,8 @@ void InGame::logic(void)
 				}
 			}
 			// Only add to chain if the X and Y coordinates are not already present
-			if (!found)
+			if (!found && ((board.cells[Chain.back().x][Chain.back().y].color == board.cells[cursorX][cursorY].color) || (board.cells[Chain.back().x][Chain.back().y].shape == board.cells[cursorX][cursorY].shape)))
+			// Only add to the chain if the color or shape is the same as the last in the chain
 			{
 				Chain.push_back(bruh{cursorX, cursorY});
 			}
