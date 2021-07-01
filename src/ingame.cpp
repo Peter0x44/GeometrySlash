@@ -40,7 +40,8 @@ void InGame::logic(void)
 		{
 			Chain.pop_back();
 		}
-		else
+		else if (((std::abs(Chain.back().x  -  cursorX) <= 1) && (std::abs(Chain.back().y  -  cursorY) <= 1))
+		&& ((cursorX == Chain.back().x) != (cursorY == Chain.back().y))) //only allow cardinal movements of ±1
 		{
 			bool found = false;
 			for (const bruh& i: Chain)
