@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include "ingame.h"
 #include "globals.h"
+#include "random.h"
 
 void InGame::logic(void)
 {
@@ -131,8 +132,8 @@ InGame::InGame(void)
 	{
 		for (int j = 0; j < 7; ++j)
 		{
-			board.cells[i][j].color = static_cast<Colors>(GetRandomValue(0, 4));
-			board.cells[i][j].shape = static_cast<Shapes>(GetRandomValue(0, 4));
+			board.cells[i][j].color = static_cast<Colors>(GenerateRandomShapeOrColor());
+			board.cells[i][j].shape = static_cast<Shapes>(GenerateRandomShapeOrColor());
 		}
 	}
 }
