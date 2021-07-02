@@ -59,7 +59,21 @@ void InGame::logic(void)
 				Chain.push_back(bruh{cursorX, cursorY});
 			}
 		}
-	} else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) Chain.clear();
+	}
+	else if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	{
+		if (Chain.size() == 1)
+			Chain.clear();
+		else
+		{
+			for (const bruh& i: Chain)
+			{
+				board.cells[i.x][i.y].color = static_cast<Colors>(GenerateRandomShapeOrColor());
+				board.cells[i.x][i.y].shape = static_cast<Shapes>(GenerateRandomShapeOrColor());
+			}
+			Chain.clear();
+		}
+	}
 	//clear chain if mouse is released
 
 	int position = 0;
