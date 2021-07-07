@@ -2,7 +2,9 @@
 
 A simple game made in c++ using the raylib graphics library
 
-Goal: Create the longest chain you can, joining tiles of the same colour or shape.
+Goal: Create the longest chain you can, joining tiles of the same colour or shape. 
+
+How to play: Click and hold on the tile you want to start the chain from and drag your mouse to make a chain. Release the mouse to finish the chain.
 
 If you have any suggestions or bug reports, do not hesitate to create an Issue on the GitHub repository
 
