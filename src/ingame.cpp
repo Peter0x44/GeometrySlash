@@ -53,7 +53,7 @@ void InGame::logic(void)
 						board.cells[i][jj].color = Colors::Empty;
 						board.cells[i][jj].shape = Shapes::Empty;
 
-					} else jj--;
+					} else --jj;
 				}
 			}
 
@@ -67,12 +67,15 @@ void InGame::logic(void)
 		{
 			Chain.push_back(bruh{cursorX, cursorY});
 		}
-		else if ((Chain.end()[-2].x == cursorX && Chain.end()[-2].y == cursorY) && (Chain.size() > 1)) 
+		else if (Chain.size() > 1)
 		//if you hover over the second to last cell, pop it from the chain. Effectively, this allows going backwards.
 		{
-			Chain.pop_back();
+			if ((Chain.rbegin()[1].x == cursorX) && (Chain.rbegin()[1].y == cursorY))
+			{
+				Chain.pop_back();
+			}
 		}
-		else if (((std::abs(Chain.back().x  -  cursorX) <= 1) && (std::abs(Chain.back().y  -  cursorY) <= 1))
+		if (((std::abs(Chain.back().x  -  cursorX) <= 1) && (std::abs(Chain.back().y  -  cursorY) <= 1))
 		&& ((cursorX == Chain.back().x) != (cursorY == Chain.back().y))) //only allow cardinal movements of ±1
 		{
 			bool found = false;
