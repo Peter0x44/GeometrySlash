@@ -161,6 +161,8 @@ void InGame::DrawBoard(void)
 	{
 		for (int j = 0; j < 7; ++j)
 		{
+			if (board.cells[i][j].color == Colors::Empty)
+				continue;
 			TextureBounds.x = spriteSizeAtlas * static_cast<int>(board.cells[i][j].color);
 			TextureBounds.y = spriteSizeAtlas * static_cast<int>(board.cells[i][j].shape);
 			// Enum values also correspond to position in texture atlas
