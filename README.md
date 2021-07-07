@@ -29,3 +29,6 @@ Building the project does not require, but is easier with CMake. It's recommende
 1. run the binary with `./GeometrySlash`
 
 **You can also get a build from the [Releases page](https://github.com/Peter0x44/GeometrySlash/Releases), in which case just follow steps 5-6 in the directory GeometrySlash is in after you Download it.**
+
+## Building (Windows)
+ Coming Soon, for now just grab the precompiled version from the Releases Page
