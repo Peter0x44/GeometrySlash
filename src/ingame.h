@@ -13,7 +13,8 @@ enum class Shapes
 	Circle,
 	Triangle,
 	Rhombus,
-	Heart
+	Heart,
+	Empty
 };
 
 enum class Colors
@@ -22,7 +23,8 @@ enum class Colors
 	Yellow,
 	Blue,
 	Green,
-	Orange
+	Orange,
+	Empty
 };
 
 

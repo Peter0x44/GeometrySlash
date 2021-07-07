@@ -28,7 +28,38 @@ void InGame::logic(void)
 	else
 		cursorY = (cursorY-gridOffsetY) / cellSize;
 
-	
+	for (int i = 0; i < 7; ++i)
+	{
+		if (board.cells[i][0].color == Colors::Empty)
+		{
+			board.cells[i][0].color = static_cast<Colors>(GenerateRandomShapeOrColor());
+			board.cells[i][0].shape = static_cast<Shapes>(GenerateRandomShapeOrColor());
+		}
+	}
+	for (int j = 6; j >= 0; --j)
+	{
+		for (int i = 6; i >= 0; --i)
+		{
+			//std::cout << "i = " << i << " j = " << j << std::endl;
+			if (board.cells[i][j].color == Colors::Empty)
+			{
+				int jj = ((j - 1 < 0) ? 0 : j - 1 );
+				while (jj >= 0)
+				{
+					if (board.cells[i][jj].color != Colors::Empty)
+					{
+						board.cells[i][jj+1].color = board.cells[i][jj].color;
+						board.cells[i][jj+1].shape = board.cells[i][jj].shape;
+						board.cells[i][jj].color = Colors::Empty;
+						board.cells[i][jj].shape = Shapes::Empty;
+
+					} else jj--;
+				}
+			}
+
+		}
+	}
+
 	//Logic for chain selection
 	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 	{
@@ -68,8 +99,8 @@ void InGame::logic(void)
 		{
 			for (const bruh& i: Chain)
 			{
-				board.cells[i.x][i.y].color = static_cast<Colors>(GenerateRandomShapeOrColor());
-				board.cells[i.x][i.y].shape = static_cast<Shapes>(GenerateRandomShapeOrColor());
+				board.cells[i.x][i.y].color = Colors::Empty;
+				board.cells[i.x][i.y].shape = Shapes::Empty;
 			}
 			Chain.clear();
 		}
