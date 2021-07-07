@@ -32,7 +32,7 @@ Building the project does not require, but is easier with CMake. It's recommende
 
 **You can also get a build from the [Releases page](https://github.com/Peter0x44/GeometrySlash/Releases), in which case just follow steps 7-8 in the directory GeometrySlash is in after you Download it.**
 
-## Building (Windows)
+## Building (Windows, MinGW)
 
 It's possible to not compile GeometrySlash with CMake, but we recommend that you do so because it simplifies a lot of things. You can get it on Windows from [here](https://cmake.org/download/). It's also possible to get it on Scoop, Winget or Chocolatey.
 
@@ -44,7 +44,23 @@ You should use PowerShell for these commands as it's just a bit better and that'
 2. Cd into GeometrySlash. `cd GeometrySlash`
 3. Install the Raylib git submodule by running this: `git submodule update --init --recursive`
 4. Make a build folder. Your builds will go here. `mkdir build; cd build`
-5. Setup CMake. **Make sure to define MinGW Makefiles because we do not use MSVC for this project!** `cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"`
+5. Setup CMake. **Make sure to define MinGW Makefiles if you are using MinGW!** `cmake .. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"`
 6. Make sure you have mingw32-make. If you do, just run it in the build directory and it will start compiling everything. It won't take long, and once it's finished, then
-7. Run GeometrySlash.exe! You have just compiled GeometrySlash for Windows.
+7. Run GeometrySlash.exe! You have just compiled GeometrySlash for Windows using MinGW.
 
+## Building (Windows, MSVC)
+
+We still recommend you to use CMake to compile GeometrySlash, you can get it from [here](https://cmake.org/download/). It's also possible to get it on Scoop, Winget or Chocolatey.
+
+Still, try to use PowerShell because it's much better than Command Prompt.
+
+You need to have Visual Studio 2019 (2017 miiiiiiight work? I'm not sure.) with C++ Development selected in the installer. It doesn't matter if you're using Community, Enterprise bla bla bla.
+
+1. Clone the repository using Git. Execute this in a terminal: `git clone https://github.com/Peter0x44/GeometrySlash`
+2. Cd into GeometrySlash. `cd GeometrySlash`
+3. Install the Raylib git submodule by running this: `git submodule update --init --recursive`
+4. Make a build folder. Your builds will go here. `mkdir build; cd build`
+5. If line 15 of CMakeLists.txt isn't commented out, comment it out. Microsoft's compiler won't compile the project with those flags enabled.
+6. Setup CMake. `cmake .. -DCMAKE_BUILD_TYPE=Release`
+7. Let's build the project! Run `cmake --build .`
+8. Go into Debug, your build of GeometrySlash is there. You have now compiled GeometrySlash for Windows using MSVC.
