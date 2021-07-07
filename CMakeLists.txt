@@ -12,6 +12,3 @@ add_subdirectory(libs/raylib)
 
 add_executable(GeometrySlash src/main.cpp src/gamestate.cpp src/gamestate.h src/ingame.cpp src/ingame.h src/mainmenu.cpp src/mainmenu.h src/random.cpp src/random.h)
 target_link_libraries(GeometrySlash PRIVATE raylib)
-target_compile_options(GeometrySlash PRIVATE -Wall -Wextra)
-#target_compile_definitions(GeometrySlash PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/assets/") # Set the asset path macro to the absolute path on the dev machine
-#target_compile_definitions(GeometrySlash PUBLIC ASSETS_PATH="relative-path-to-assets-in-the-game-package") # Set the asset path macro in release more
