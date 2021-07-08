@@ -59,10 +59,19 @@ public:
 private:
 	void DrawBoard(void);
 	void DrawChainLines(void);
+	void DrawScore(void);
+	void DrawScoreToAdd(void);
 	Board board;
 	int cursorY, cursorX;
 	int gridOffsetX;
 	int gridOffsetY;
+	int ScoreFontSize = 45;
+	unsigned char ScoreToAddAlpha;
+	Vector2 ScoreDims;
+	Vector2 ScorePos;
+	Vector2 ScoreToAddPos;
+	long unsigned int score = 0;
+	unsigned int scoreToAdd = 0;
 	std::vector<bruh> Chain;
 };
 
