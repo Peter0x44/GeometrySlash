@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <string.h>
 #include <raylib.h>
 #include "ingame.h"
 #include "globals.h"
@@ -105,27 +106,25 @@ void InGame::logic(void)
 				board.cells[i.x][i.y].color = Colors::Empty;
 				board.cells[i.x][i.y].shape = Shapes::Empty;
 			}
+			scoreToAdd = Chain.size()*Chain.size();
+			ScoreToAddPos = GetMousePosition();
+			ScoreToAddAlpha = 255;
+			ScoreToAddPos.x += 20;
+			ScoreToAddPos.y -= 20;
+			score += scoreToAdd;
 			Chain.clear();
 		}
 	}
 	//clear chain if mouse is released
-
-	int position = 0;
-	for (const bruh& i: Chain)
-	{
-		std::cout << "Chain[" << position << "] .x: " << i.x << " .y:" << i.y << std::endl;
-		++position;
-	}
+	std::cout << "Score: " << score << std::endl;
 }
 
 void InGame::render(void)
 {
+	if (!Chain.empty()) DrawChainLines();
 	DrawBoard();
-
-	if (!Chain.empty())
-	{
-		DrawChainLines();
-	}
+	DrawScore();
+	DrawScoreToAdd();
 }
 
 
@@ -174,6 +173,21 @@ void InGame::DrawBoard(void)
 			DrawTexturePro(tiles, TextureBounds, TileDest, Vector2{0,0}, 0.0f, WHITE);
 		}
 	}
+}
+
+void InGame::DrawScore(void)
+{
+	ScoreDims = MeasureTextEx(GetFontDefault(), TextFormat("%d", score), ScoreFontSize, ScoreFontSize/10);
+	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
+	ScorePos.y = gridOffsetY - ScoreDims.y;
+	DrawText(TextFormat("%d", score), ScorePos.x, ScorePos.y, ScoreFontSize, RED);	
+}
+
+void InGame::DrawScoreToAdd(void)
+{
+	DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, Color{255,255,255,ScoreToAddAlpha});
+	if (ScoreToAddAlpha > 0) ScoreToAddAlpha -= 3;
+	ScoreToAddPos.y -= 2;
 }
 
 InGame::InGame(void)
