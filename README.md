@@ -14,7 +14,7 @@ If you have any suggestions or bug reports, do not hesitate to create an Issue o
 - [ ] Better Contrast of background and tiles
 - [ ] Scoring system
 - [ ] In-Game How to play instructions
-- [ ] Limit minimum size to 800x600
+- [x] Limit minimum size to 800x600
 
 ## Building (Linux/macOS)
 
