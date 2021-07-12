@@ -32,10 +32,13 @@ void MainMenu::logic(void)
 		q.push_back(scroll);
 	}
 
-	if (q.front().dest.x > GetScreenWidth())
+	if (!q.empty())
 	{
-		q.pop_front();
-		// Delete from queue if the front shape goes offscreen
+		if (q.front().dest.x > GetScreenWidth())
+		{
+			q.pop_front();
+			// Delete from queue if the front shape goes offscreen
+		}
 	}
 
 	int y = GetScreenHeight()/3;

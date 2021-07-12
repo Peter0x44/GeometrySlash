@@ -181,10 +181,10 @@ void InGame::DrawBoard(void)
 
 void InGame::DrawScore(void)
 {
-	ScoreDims = MeasureTextEx(GetFontDefault(), TextFormat("%d", score), ScoreFontSize, ScoreFontSize/10);
+	ScoreDims = MeasureTextEx(GetFontDefault(), TextFormat("Score: %d", score), ScoreFontSize, ScoreFontSize/10);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = gridOffsetY - ScoreDims.y;
-	DrawText(TextFormat("%d", score), ScorePos.x, ScorePos.y, ScoreFontSize, RED);	
+	DrawText(TextFormat("Score: %d", score), ScorePos.x, ScorePos.y, ScoreFontSize, RED);	
 }
 
 void InGame::DrawScoreToAdd(void)
