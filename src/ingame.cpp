@@ -114,6 +114,15 @@ void InGame::logic(void)
 		}
 	}
 	//clear chain if mouse is released
+
+	// Timer
+	TimeLeft = gameLength - (GetTime() - startTime);
+	std::cout << "StartTime: " << startTime << '\n' << GetTime() << std::endl;
+	if ((GetTime() - startTime) > gameLength)
+	{
+		SetNextState(GameStates::MainMenu);
+		std::cout << "Game over!" << std::endl;
+	}
 }
 
 void InGame::render(void)
@@ -121,6 +130,7 @@ void InGame::render(void)
 	if (!Chain.empty()) DrawChainLines();
 	DrawBoard();
 	DrawScore();
+	DrawTimer();
 	DrawScoreToAdd();
 }
 
@@ -170,13 +180,7 @@ void InGame::DrawBoard(void)
 			DrawTexturePro(tiles, TextureBounds, TileDest, Vector2{0,0}, 0.0f, WHITE);
 		}
 	}
-	// Game is over
-	std::cout << "StartTime: " << startTime << '\n' << GetTime() << std::endl;
-	if ((GetTime() - startTime) > gameLength)
-	{
-		SetNextState(GameStates::MainMenu);
-		std::cout << "Game over!" << std::endl;
-	}
+
 }
 
 void InGame::DrawScore(void)
@@ -195,6 +199,15 @@ void InGame::DrawScoreToAdd(void)
 		DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, Color{255,255,255,ScoreToAddAlpha});
 		ScoreToAddPos.y -= 2;
 	}
+}
+
+void InGame::DrawTimer(void)
+{
+	TimerDims = MeasureTextEx(GetFontDefault(), TextFormat("Time: %d", TimeLeft), ScoreFontSize, ScoreFontSize/10);
+	TimerPos.x = GetScreenWidth()/2 - TimerDims.x/2;
+	TimerPos.y = (gridOffsetY*2) + gridHeight - TimerDims.y;
+	DrawText(TextFormat("Time: %d", TimeLeft), TimerPos.x, TimerPos.y, ScoreFontSize, BLUE);
+
 }
 
 InGame::InGame(void)

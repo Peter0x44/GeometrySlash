@@ -61,6 +61,7 @@ private:
 	void DrawChainLines(void);
 	void DrawScore(void);
 	void DrawScoreToAdd(void);
+	void DrawTimer(void);
 	Board board;
 	int cursorY, cursorX;
 	int gridOffsetX;
@@ -70,9 +71,12 @@ private:
 	Vector2 ScoreDims;
 	Vector2 ScorePos;
 	Vector2 ScoreToAddPos;
+	Vector2 TimerDims;
+	Vector2 TimerPos;
 	long unsigned int scoreToAdd = 0;
 	std::vector<bruh> Chain;
 	const double startTime = GetTime();
+	int TimeLeft;
 };
 
 #endif
