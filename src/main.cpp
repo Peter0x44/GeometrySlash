@@ -31,7 +31,7 @@ int main(void)
 
 		BeginDrawing();
 
-			ClearBackground(DARKGRAY);
+			ClearBackground(Color{ 50, 50, 50, 255 });
 			CurrentState->render();
 
 		EndDrawing();
