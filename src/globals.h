@@ -22,6 +22,8 @@ constexpr int scrollSpeed = 2; //pixels per frame advance of scrolling sprites
 
 constexpr double gameLength = 15.0;
 
+extern long unsigned int score;
+
 extern Texture2D tiles;
 
 #endif

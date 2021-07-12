@@ -70,8 +70,7 @@ private:
 	Vector2 ScoreDims;
 	Vector2 ScorePos;
 	Vector2 ScoreToAddPos;
-	long unsigned int score = 0;
-	unsigned int scoreToAdd = 0;
+	long unsigned int scoreToAdd = 0;
 	std::vector<bruh> Chain;
 	const double startTime = GetTime();
 };

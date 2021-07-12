@@ -11,6 +11,8 @@ GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
 GameStates NextState = GameStates::Null;
 
+long unsigned int score = 0;
+
 void LoadAssets(void);
 void UnloadAssets(void);
 
