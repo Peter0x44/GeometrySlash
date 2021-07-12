@@ -29,6 +29,8 @@ private:
 	Vector2 StartDims;
 	int TitleFontSize;
 
+	Vector2 VersionPos;
+	Vector2 VersionDims;
 	Rectangle StartButton;
 	
 public:

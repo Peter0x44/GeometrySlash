@@ -6,8 +6,9 @@ void MainMenu::logic(void)
 	//Determine size and position of Title Text
 	TitleFontSize = GetScreenHeight()/10;
 	TitleDims = MeasureTextEx(GetFontDefault(), "Geometry Slash", TitleFontSize, TitleFontSize/10);
-	TitlePos.x = GetScreenWidth()/2 - TitleDims.x/2;
+	TitlePos.x = GetScreenWidth()/2 - TitleDims.x/1.6;
 	TitlePos.y = GetScreenHeight()/5 - TitleDims.y/2;
+
 
 	//Determine size and position of Start button and text
 	StartButton.width = (GetScreenWidth()/6)*4;
@@ -53,7 +54,7 @@ void MainMenu::logic(void)
 
 void MainMenu::render(void)
 {
-	DrawText("Geometry Slash", TitlePos.x, TitlePos.y, TitleFontSize, RED);	
+	DrawText("Geometry Slash " VERSION_NUMBER, TitlePos.x, TitlePos.y, TitleFontSize, RED);
 	DrawRectangleRounded(StartButton, 0.5f, 0, LIGHTGRAY);
 	DrawText("Start", StartPos.x, StartPos.y, TitleFontSize, BLACK);
 

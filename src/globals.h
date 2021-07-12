@@ -1,5 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
+#define VERSION_NUMBER "1.0b"
 
 #include <array>
 #include <raylib.h>
