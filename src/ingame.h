@@ -73,6 +73,7 @@ private:
 	long unsigned int score = 0;
 	unsigned int scoreToAdd = 0;
 	std::vector<bruh> Chain;
+	const double startTime = GetTime();
 };
 
 #endif

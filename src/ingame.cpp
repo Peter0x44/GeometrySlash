@@ -41,7 +41,6 @@ void InGame::logic(void)
 	{
 		for (int i = 6; i >= 0; --i)
 		{
-			//std::cout << "i = " << i << " j = " << j << std::endl;
 			if (board.cells[i][j].color == Colors::Empty)
 			{
 				int jj = ((j - 1 < 0) ? 0 : j - 1 );
@@ -53,7 +52,6 @@ void InGame::logic(void)
 						board.cells[i][jj+1].shape = board.cells[i][jj].shape;
 						board.cells[i][jj].color = Colors::Empty;
 						board.cells[i][jj].shape = Shapes::Empty;
-
 					} else --jj;
 				}
 			}
@@ -116,7 +114,6 @@ void InGame::logic(void)
 		}
 	}
 	//clear chain if mouse is released
-	std::cout << "Score: " << score << std::endl;
 }
 
 void InGame::render(void)
@@ -172,6 +169,13 @@ void InGame::DrawBoard(void)
 			TileDest.y = gridOffsetY + paddingSize*(j+1) + spriteSize*j;
 			DrawTexturePro(tiles, TextureBounds, TileDest, Vector2{0,0}, 0.0f, WHITE);
 		}
+	}
+	// Game is over
+	std::cout << "StartTime: " << startTime << '\n' << GetTime() << std::endl;
+	if ((GetTime() - startTime) > gameLength)
+	{
+		SetNextState(GameStates::MainMenu);
+		std::cout << "Game over!" << std::endl;
 	}
 }
 
