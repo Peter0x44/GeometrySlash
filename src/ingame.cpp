@@ -139,7 +139,7 @@ void InGame::DrawChainLines(void)
 		nextPoint.x = gridOffsetX + ((nextPoint.x-1) * cellSize) + paddingSize + spriteSize/2;
 		nextPoint.y = gridOffsetY + ((nextPoint.y-1) * cellSize) + paddingSize + spriteSize/2;
 
-		DrawLineEx(currentPoint, nextPoint, 4.0f, BLACK);
+		DrawLineEx(currentPoint, nextPoint, 4.0f, WHITE);
 	}
 }
 
