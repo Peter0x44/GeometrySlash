@@ -66,7 +66,7 @@ private:
 	int gridOffsetX;
 	int gridOffsetY;
 	int ScoreFontSize = 45;
-	unsigned char ScoreToAddAlpha;
+	unsigned char ScoreToAddAlpha = 0;
 	Vector2 ScoreDims;
 	Vector2 ScorePos;
 	Vector2 ScoreToAddPos;
