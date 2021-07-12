@@ -189,13 +189,17 @@ void InGame::DrawScore(void)
 
 void InGame::DrawScoreToAdd(void)
 {
-	DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, Color{255,255,255,ScoreToAddAlpha});
-	if (ScoreToAddAlpha > 0) ScoreToAddAlpha -= 3;
-	ScoreToAddPos.y -= 2;
+	if (ScoreToAddAlpha > 0)
+	{
+		ScoreToAddAlpha -= 3;
+		DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, Color{255,255,255,ScoreToAddAlpha});
+		ScoreToAddPos.y -= 2;
+	}
 }
 
 InGame::InGame(void)
 {
+	score = 0;
 	for (int i = 0; i < 7; ++i)
 	{
 		for (int j = 0; j < 7; ++j)
