@@ -12,7 +12,7 @@ If you have any suggestions or bug reports, do not hesitate to create an Issue o
 
 - [ ] Background Music
 - [ ] Better Contrast of background and tiles
-- [ ] Scoring system
+- [x] Scoring system
 - [ ] In-Game How to play instructions
 - [x] Limit minimum size to 800x600
 
