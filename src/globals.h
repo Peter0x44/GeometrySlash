@@ -4,6 +4,8 @@
 #include <array>
 #include <raylib.h>
 
+#define VERSION_NUMBER "v0.1b"
+
 constexpr int screenWidth = 640;
 constexpr int screenHeight = 480;
 
