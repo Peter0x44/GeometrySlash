@@ -1,12 +1,13 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
-#define VERSION_NUMBER "1.0b"
 
 #include <array>
 #include <raylib.h>
 
 constexpr int screenWidth = 640;
 constexpr int screenHeight = 480;
+
+#define VERSION_NUMBER "1.0b"
 
 constexpr int spriteSizeAtlas = 32;
 constexpr int spriteSize = 48;

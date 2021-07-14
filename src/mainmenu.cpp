@@ -5,8 +5,8 @@ void MainMenu::logic(void)
 {	
 	//Determine size and position of Title Text
 	TitleFontSize = GetScreenHeight()/10;
-	TitleDims = MeasureTextEx(GetFontDefault(), "Geometry Slash", TitleFontSize, TitleFontSize/10);
-	TitlePos.x = GetScreenWidth()/2 - TitleDims.x/1.6;
+	TitleDims = MeasureTextEx(GetFontDefault(), "Geometry Slash " VERSION_NUMBER, TitleFontSize, TitleFontSize/10);
+	TitlePos.x = GetScreenWidth()/2 - TitleDims.x/2;
 	TitlePos.y = GetScreenHeight()/5 - TitleDims.y/2;
 
 
