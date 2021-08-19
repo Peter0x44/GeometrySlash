@@ -8,7 +8,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
 set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
 
+# Setting paramters for libcurl
+set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE) # don't build curl executable, only library
+
 add_subdirectory(libs/raylib)
+add_subdirectory(libs/curl)
 
 add_executable(GeometrySlash src/main.cpp src/gamestate.cpp src/gamestate.h src/ingame.cpp src/ingame.h src/mainmenu.cpp src/mainmenu.h src/random.cpp src/random.h)
-target_link_libraries(GeometrySlash PRIVATE raylib)
+target_link_libraries(GeometrySlash PRIVATE raylib libcurl)
