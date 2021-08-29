@@ -10,6 +10,7 @@ set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
 
 # Setting paramters for libcurl
 set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE) # don't build curl executable, only library
+set(HTTP_ONLY ON CACHE BOOL "" FORCE) # only http support is needed
 
 add_subdirectory(libs/raylib)
 add_subdirectory(libs/curl)
