@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream>
 #include <string.h>
 #include <raylib.h>
 #include "ingame.h"
@@ -106,9 +105,9 @@ void InGame::logic(void)
 			}
 			scoreToAdd = Chain.size()*Chain.size();
 			ScoreToAddPos = GetMousePosition();
-			ScoreToAddAlpha = 255;
-			ScoreToAddPos.x += 20;
-			ScoreToAddPos.y -= 20;
+			ScoreLifetime = 1.5f;
+			ScoreToAddPos.x += 20 * GetFrameTime() * 60;
+			ScoreToAddPos.y -= 20 * GetFrameTime() * 60;
 			score += scoreToAdd;
 			Chain.clear();
 		}
@@ -191,11 +190,13 @@ void InGame::DrawScore(void)
 
 void InGame::DrawScoreToAdd(void)
 {
-	if (ScoreToAddAlpha > 0)
+	// ScoreLifeTime determines how many seconds to show the score for
+	if (ScoreLifetime > 0)
 	{
-		ScoreToAddAlpha -= 3;
-		DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, Color{255,255,255,ScoreToAddAlpha});
-		ScoreToAddPos.y -= 2;
+		ScoreToAddColor = ColorAlpha(WHITE, ScoreLifetime/1.5f);
+		DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, ScoreToAddColor);
+		ScoreToAddPos.y -= 2 * GetFrameTime() * 60;
+		ScoreLifetime -= GetFrameTime();
 	}
 }
 

@@ -28,11 +28,11 @@ private:
 	Vector2 StartPos;
 	Vector2 StartDims;
 	int TitleFontSize;
+	double Timer = GetTime() + spawnTime; // Timer that determines how often to spawn a scrolling sprite
 
 	Rectangle StartButton;
 	
 public:
-	
 	void logic(void) final override;
 	void render(void) final override;
 };

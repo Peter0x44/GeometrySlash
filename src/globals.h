@@ -19,7 +19,9 @@ constexpr int gridBorder = 4;
 
 constexpr int cellSize = spriteSize + paddingSize;
 
-constexpr int scrollSpeed = 2; //pixels per frame advance of scrolling sprites
+constexpr double spawnTime = (1.0/60.0) * spriteSize; // Determines how often to spawn a scrolling sprite.
+
+constexpr int scrollSpeed = 2; //pixels per 60th of a second advance of scrolling sprites
 
 constexpr double gameLength = 15.0;
 

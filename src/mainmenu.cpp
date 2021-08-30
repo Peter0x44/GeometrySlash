@@ -23,13 +23,12 @@ void MainMenu::logic(void)
 		SetNextState(GameStates::InGame);
 	}
 
-	static int frameCount;
-
-	if (!(frameCount % (spriteSize*2 / scrollSpeed)))
+	if (GetTime() > Timer)
 	{
-		// Add new shape to queue every sprite size * 2 frames (therefore leaving a gap of one sprite between them) and divide by speed modifier 
+		// Add new shape to queue every spawnTime seconds. spawnTime is chosen so there is a gap of SpriteSize pixels between each one.
 		scroller scroll;
 		q.push_back(scroll);
+		Timer += spawnTime;
 	}
 
 	if (!q.empty())
@@ -45,13 +44,12 @@ void MainMenu::logic(void)
 
 	for (scroller& scroller: q)
 	{
-		scroller.dest.x += scrollSpeed;
-		// Move every shape by scrollSpeed pixels every frame
+		scroller.dest.x += scrollSpeed * GetFrameTime() * 60;
+		// Move every shape by scrollSpeed pixels
 		scroller.dest.y = y;
 		// Set Y position of all of them, so it the positions stay correct when the window is resized
 	}
 
-	++frameCount;
 }
 
 void MainMenu::render(void)
