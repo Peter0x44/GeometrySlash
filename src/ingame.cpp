@@ -117,11 +117,9 @@ void InGame::logic(void)
 
 	// Timer
 	TimeLeft = gameLength - (GetTime() - startTime);
-	std::cout << "StartTime: " << startTime << '\n' << GetTime() << std::endl;
 	if ((GetTime() - startTime) > gameLength)
 	{
 		SetNextState(GameStates::MainMenu);
-		std::cout << "Game over!" << std::endl;
 	}
 }
 
