@@ -19,5 +19,18 @@ endif()
 add_subdirectory(libs/raylib)
 add_subdirectory(libs/curl)
 
-add_executable(GeometrySlash src/main.cpp src/gamestate.cpp src/gamestate.h src/ingame.cpp src/ingame.h src/mainmenu.cpp src/mainmenu.h src/random.cpp src/random.h)
+add_executable(GeometrySlash
+	src/main.cpp
+	src/gamestate.cpp
+	src/gamestate.h
+	src/ingame.cpp
+	src/ingame.h
+	src/mainmenu.cpp
+	src/mainmenu.h
+	src/random.cpp
+	src/random.h
+	src/resultsscreen.cpp
+	src/resultsscreen.h
+	src/raygui.h
+)
 target_link_libraries(GeometrySlash PRIVATE raylib libcurl)

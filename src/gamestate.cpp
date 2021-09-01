@@ -1,6 +1,7 @@
 #include "mainmenu.h"
 #include "gamestate.h"
 #include "ingame.h"
+#include "resultsscreen.h"
 
 extern GameState* CurrentState;
 extern GameStates StateID;
@@ -19,6 +20,9 @@ void ChangeState(void)
 				break;
 			case GameStates::InGame:
 				CurrentState = new InGame();
+				break;
+			case GameStates::ResultsScreen:
+				CurrentState = new ResultsScreen();
 				break;
 			case GameStates::Null:
 				break;

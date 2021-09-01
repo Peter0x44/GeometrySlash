@@ -118,7 +118,7 @@ void InGame::logic(void)
 	TimeLeft = gameLength - (GetTime() - startTime);
 	if ((GetTime() - startTime) > gameLength)
 	{
-		SetNextState(GameStates::MainMenu);
+		SetNextState(GameStates::ResultsScreen);
 	}
 }
 
