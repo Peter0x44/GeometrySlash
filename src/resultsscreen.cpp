@@ -104,6 +104,14 @@ void ResultsScreen::render(void)
 
 ResultsScreen::ResultsScreen(void)
 {
+	auto fontSizeCallback
+	{
+		[] (void)
+		{
+			return GetScreenHeight()/20.0f;
+		}
+	};
+
 	// Button constructor takes a function that calculates the position of the rectangle
 	MainMenuButton = new Button (
 		[](void)
@@ -115,10 +123,7 @@ ResultsScreen::ResultsScreen(void)
 			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
 			return tmp;
 		},
-		[](void)
-		{
-			return GetScreenHeight()/20.0f;
-		},
+		fontSizeCallback,
 		"Main menu"
 	);
 	PostScoreButton = new Button (
@@ -131,10 +136,7 @@ ResultsScreen::ResultsScreen(void)
 			tmp.y = ((GetScreenHeight()/6.0f)*5.0f)-(tmp.height/2.0f);
 			return tmp;
 		},
-		[](void)
-		{
-			return GetScreenHeight()/20.0f;
-		},
+		fontSizeCallback,
 		"Submit score"
 	);
 	LeaderboardButton = new Button (
@@ -147,10 +149,7 @@ ResultsScreen::ResultsScreen(void)
 			tmp.y = ((GetScreenHeight()/6.0f)*5.0f)-(tmp.height/2.0f);
 			return tmp;
 		},
-		[](void)
-		{
-			return GetScreenHeight()/20.0f;
-		},
+		fontSizeCallback,
 		"Leaderboard"
 	);
 	PlayAgainButton = new Button (
@@ -163,10 +162,7 @@ ResultsScreen::ResultsScreen(void)
 			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
 			return tmp;
 		},
-		[](void)
-		{
-			return GetScreenHeight()/20.0f;
-		},
+		fontSizeCallback,
 		"Play again"
 	);
 }
