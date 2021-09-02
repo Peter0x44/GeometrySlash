@@ -22,6 +22,7 @@ void Button::logic(void)
 	if (IsWindowResized())
 	{
 		_Rect = _RectCallback();
+		_FontSize = _FontSizeCallback();
 		_TextDims = MeasureTextEx(GetFontDefault(), _Text.c_str(), _FontSize, _FontSize/10);
 		_TextPos.x = _Rect.x + _Rect.width/2 - _TextDims.x/2;
 		_TextPos.y = _Rect.y + _Rect.height/2 - _TextDims.y/2;
