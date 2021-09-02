@@ -117,7 +117,7 @@ ResultsScreen::ResultsScreen(void)
 		[](void)
 		{
 			Rectangle tmp;
-			tmp.width = GetScreenWidth()/3.5f;
+			tmp.width = GetScreenWidth()/3.75f;
 			tmp.height = GetScreenHeight()/7.5f;
 			tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
 			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
@@ -130,7 +130,7 @@ ResultsScreen::ResultsScreen(void)
 		[](void)
 		{
 			Rectangle tmp;
-			tmp.width = GetScreenWidth()/3.5f;
+			tmp.width = GetScreenWidth()/3.75f;
 			tmp.height = GetScreenHeight()/7.5f;
 			tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
 			tmp.y = ((GetScreenHeight()/6.0f)*5.0f)-(tmp.height/2.0f);
@@ -143,7 +143,7 @@ ResultsScreen::ResultsScreen(void)
 		[](void)
 		{
 			Rectangle tmp;
-			tmp.width = GetScreenWidth()/3.5f;
+			tmp.width = GetScreenWidth()/3.75f;
 			tmp.height = GetScreenHeight()/7.5f;
 			tmp.x = (GetScreenWidth()/3.0f)*2.0f-(tmp.width/2.0f);
 			tmp.y = ((GetScreenHeight()/6.0f)*5.0f)-(tmp.height/2.0f);
@@ -156,7 +156,7 @@ ResultsScreen::ResultsScreen(void)
 		[](void)
 		{
 			Rectangle tmp;
-			tmp.width = GetScreenWidth()/3.5f;
+			tmp.width = GetScreenWidth()/3.75f;
 			tmp.height = GetScreenHeight()/7.5f;
 			tmp.x = (GetScreenWidth()/3.0f)*2.0f-(tmp.width/2.0f);
 			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
