@@ -5,7 +5,7 @@
 
 bool Button::clicked(void)
 {
-	if (CheckCollisionPointRec(GetMousePosition(), _RectCallback()) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	if (CheckCollisionPointRec(GetMousePosition(), _Rect) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		return true;
 	else
 		return false;
@@ -13,28 +13,34 @@ bool Button::clicked(void)
 
 void Button::draw(void)
 {
-	DrawRectangleRounded(_RectCallback(), 0.5f, 0, LIGHTGRAY);
-
-//	MeasureTextEx(
-
-//	DrawTextEx(GetFontDefault(), _text.c_str(), TextPosCallback, _fontSize, _fontSize/10, BLACK);
-//	DrawTextV
+	DrawRectangleRounded(_Rect, 0.5f, 0, LIGHTGRAY);
+	DrawTextEx(GetFontDefault(), _Text.c_str(), _TextPos, _FontSize, _FontSize/10, BLACK);
 }
 
-//Button::Button(Rectangle (*RectCallback)(void))
-//{
-//	_RectCallback = RectCallback;
-//}
-//Button::Button(std::function<Rectangle(void)> RectCallback)
-Button::Button(const std::function<Rectangle(void)>& RectCallback)
+void Button::logic(void)
 {
-	_RectCallback = RectCallback;
+	if (IsWindowResized())
+	{
+		_Rect = _RectCallback();
+		_TextDims = MeasureTextEx(GetFontDefault(), _Text.c_str(), _FontSize, _FontSize/10);
+		_TextPos.x = _Rect.x + _Rect.width/2 - _TextDims.x/2;
+		_TextPos.y = _Rect.y + _Rect.height/2 - _TextDims.y/2;
+	}
 }
 
-//Button::Button(float fontSize, std::string& text, std::function<Rectangle(void)> _RectCallback, std::function<Vector2(void)> _TextPosCallback, std::function<float(void)> FontSizeCallback)
-//{
-//	_RectCallback = RectCallback;
-//	_TextPosCallback = TextPosCallback;
-//	_FontSizeCallback = FontSizeCallback;
-//	_text = text;
-//}
+Button::Button(const std::function<Rectangle(void)>& RectCallback, const std::function<float(void)>& FontSizeCallback, const std::string& Text)
+{
+	// Callback funtion that calculates the rectangle the button is drawn as
+	_RectCallback = RectCallback;
+	_Rect = _RectCallback();
+	// Callback function that calculates the size of the font
+	_FontSizeCallback = FontSizeCallback;
+	_FontSize = _FontSizeCallback();
+
+	_Text = Text;
+
+
+	_TextDims = MeasureTextEx(GetFontDefault(), _Text.c_str(), _FontSize, _FontSize/10);
+	_TextPos.x = _Rect.x + _Rect.width/2 - _TextDims.x/2;
+	_TextPos.y = _Rect.y + _Rect.height/2 - _TextDims.y/2;
+}

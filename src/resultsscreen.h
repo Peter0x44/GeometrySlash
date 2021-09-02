@@ -26,14 +26,10 @@ private:
 	Vector2 MaxTextBoxDims;
 	Rectangle textBox;
 
-	float ButtonFontSize;
-
-
 	Button* MainMenuButton;
-//	Button PostScoreButton;
-//	Button LeaderboardButton;
-//	Button PlayAgainButton;
-
+	Button* PostScoreButton;
+	Button* LeaderboardButton;
+	Button* PlayAgainButton;
 
 public:
 	void logic(void) final override;

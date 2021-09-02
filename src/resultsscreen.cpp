@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "gamestate.h"
 #include "resultsscreen.h"
 #include "button.h"
 
@@ -24,7 +25,31 @@ void ResultsScreen::logic(void)
 	textBox.y = GetScreenHeight()/2 - MaxTextBoxDims.y/2 - 8;
 	textBox.width = MaxTextBoxDims.x + 10;
 	textBox.height = MaxTextBoxDims.y + 16;
+
+	MainMenuButton->logic();
+	PostScoreButton->logic();
+	LeaderboardButton->logic();
+	PlayAgainButton->logic();
 	
+
+	if (MainMenuButton->clicked())
+	{
+		SetNextState(GameStates::MainMenu);
+	}
+	else if (PlayAgainButton->clicked())
+	{
+		SetNextState(GameStates::InGame);
+	}
+	else if (LeaderboardButton->clicked())
+	{
+		// TODO make this button work when leaderboard screen is done
+	}
+	else if (PostScoreButton->clicked())
+	{
+		// TODO call curl and send scores to the server
+	}
+
+
 	// Code for Input box modified from Raylib example input box (https://github.com/raysan5/raylib/blob/master/examples/text/text_input_box.c)
 
 	// Get char pressed (unicode character) on the queue
@@ -52,17 +77,6 @@ void ResultsScreen::logic(void)
 	}
 
 	framesCounter++;
-
-////////MainMenuButtonRect.width = PostScoreButtonRect.width = LeaderboardButtonRect.width = PlayAgainButtonRect.width = GetScreenWidth()/4.0f;
-////////MainMenuButtonRect.height = PostScoreButtonRect.height = LeaderboardButtonRect.height = PlayAgainButtonRect.height = GetScreenHeight()/7.5f;
-
-////////MainMenuButtonRect.x = PostScoreButtonRect.x = (GetScreenWidth()/3.0f)-(MainMenuButtonRect.width/2.0f);
-////////LeaderboardButtonRect.x = PlayAgainButtonRect.x = (GetScreenWidth()/3.0f)*2.0f-(MainMenuButtonRect.width/2.0f);
-
-////////MainMenuButtonRect.y = PlayAgainButtonRect.y = (GetScreenHeight()/6.0f)*4-(MainMenuButtonRect.height/2.0f);
-////////LeaderboardButtonRect.y = PostScoreButtonRect.y = ((GetScreenHeight()/6.0f)*5.0f)-(MainMenuButtonRect.height/2.0f);
-
-
 }
 
 
@@ -81,37 +95,16 @@ void ResultsScreen::render(void)
 		// Draw blinking underscore char
 		if (((framesCounter/30)%2) == 0) DrawText("_", textBox.x + 8 + MeasureText(Username, UsernameFontSize), textBox.y + 12, UsernameFontSize, MAROON);
 	}
-	MainMenuButton->draw();
-////////DrawRectangleRec(MainMenuButtonRect, LIGHTGRAY);
-////////DrawRectangleRec(PostScoreButtonRect, LIGHTGRAY);
-////////DrawRectangleRec(LeaderboardButtonRect, LIGHTGRAY);
-////////DrawRectangleRec(PlayAgainButtonRect, LIGHTGRAY);
-}
 
-//Rectangle MainMenuButtonRectCallback(void)
-//{
-//        Rectangle tmp;
-//        tmp.width = GetScreenWidth()/4.0f;
-//        tmp.height = GetScreenHeight()/7.5f;
-//        tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
-//        tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
-//        return tmp;
-//}
+	MainMenuButton->draw();
+	PostScoreButton->draw();
+	LeaderboardButton->draw();
+	PlayAgainButton->draw();
+}
 
 ResultsScreen::ResultsScreen(void)
 {
-////////Rectangle MainMenuButtonRectCallback
-////////{
-////////	[](void)
-////////	{
-////////		Rectangle tmp;
-////////		tmp.width = GetScreenWidth()/4.0f;
-////////		tmp.height = GetScreenHeight()/7.5f;
-////////		tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
-////////		tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
-////////		return tmp;
-////////	}
-////////};
+	// Button constructor takes a function that calculates the position of the rectangle
 	MainMenuButton = new Button (
 		[](void)
 		{
@@ -121,11 +114,67 @@ ResultsScreen::ResultsScreen(void)
 			tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
 			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
 			return tmp;
-		}
+		},
+		[](void)
+		{
+			return GetScreenHeight()/20.0f;
+		},
+		"Main menu"
+	);
+	PostScoreButton = new Button (
+		[](void)
+		{
+			Rectangle tmp;
+			tmp.width = GetScreenWidth()/4.0f;
+			tmp.height = GetScreenHeight()/7.5f;
+			tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
+			tmp.y = ((GetScreenHeight()/6.0f)*5.0f)-(tmp.height/2.0f);
+			return tmp;
+		},
+		[](void)
+		{
+			return GetScreenHeight()/20.0f;
+		},
+		"Submit score"
+	);
+	LeaderboardButton = new Button (
+		[](void)
+		{
+			Rectangle tmp;
+			tmp.width = GetScreenWidth()/4.0f;
+			tmp.height = GetScreenHeight()/7.5f;
+			tmp.x = (GetScreenWidth()/3.0f)*2.0f-(tmp.width/2.0f);
+			tmp.y = ((GetScreenHeight()/6.0f)*5.0f)-(tmp.height/2.0f);
+			return tmp;
+		},
+		[](void)
+		{
+			return GetScreenHeight()/20.0f;
+		},
+		"Leaderboard"
+	);
+	PlayAgainButton = new Button (
+		[](void)
+		{
+			Rectangle tmp;
+			tmp.width = GetScreenWidth()/4.0f;
+			tmp.height = GetScreenHeight()/7.5f;
+			tmp.x = (GetScreenWidth()/3.0f)*2.0f-(tmp.width/2.0f);
+			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
+			return tmp;
+		},
+		[](void)
+		{
+			return GetScreenHeight()/20.0f;
+		},
+		"Play again"
 	);
 }
 
 ResultsScreen::~ResultsScreen(void)
 {
 	delete MainMenuButton;
+	delete PostScoreButton;
+	delete LeaderboardButton;
+	delete PlayAgainButton;
 }

@@ -8,9 +8,12 @@
 void InGame::logic(void)
 {
 	// Logic for determining hovered tile
-	gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
-	gridOffsetY = GetScreenHeight()/2 - gridHeight/2;	
-	// Calculate the position of the corner of the grid
+	if (IsWindowResized())
+	{
+		gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
+		gridOffsetY = GetScreenHeight()/2 - gridHeight/2;
+		// Calculate the position of the corner of the grid
+	}
 	cursorX = GetMouseX();
 	cursorY = GetMouseY();
 	if (cursorX < gridOffsetX) // Cursor is outside of the grid
@@ -185,7 +188,7 @@ void InGame::DrawScore(void)
 	ScoreDims = MeasureTextEx(GetFontDefault(), TextFormat("Score: %d", score), ScoreFontSize, ScoreFontSize/10);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = gridOffsetY - ScoreDims.y;
-	DrawText(TextFormat("Score: %d", score), ScorePos.x, ScorePos.y, ScoreFontSize, RED);	
+	DrawText(TextFormat("Score: %d", score), ScorePos.x, ScorePos.y, ScoreFontSize, RED);
 }
 
 void InGame::DrawScoreToAdd(void)
@@ -220,4 +223,6 @@ InGame::InGame(void)
 			board.cells[i][j].shape = static_cast<Shapes>(GenerateRandomShapeOrColor());
 		}
 	}
+	gridOffsetX = GetScreenWidth()/2 - gridWidth/2;
+	gridOffsetY = GetScreenHeight()/2 - gridHeight/2;
 }
