@@ -7,7 +7,8 @@ bool Button::clicked(void)
 {
 	if (CheckCollisionPointRec(GetMousePosition(), _RectCallback()) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		return true;
-	return false;
+	else
+		return false;
 }
 
 void Button::draw(void)
@@ -20,7 +21,12 @@ void Button::draw(void)
 //	DrawTextV
 }
 
-Button::Button(Rectangle (*RectCallback)(void))
+//Button::Button(Rectangle (*RectCallback)(void))
+//{
+//	_RectCallback = RectCallback;
+//}
+//Button::Button(std::function<Rectangle(void)> RectCallback)
+Button::Button(const std::function<Rectangle(void)>& RectCallback)
 {
 	_RectCallback = RectCallback;
 }

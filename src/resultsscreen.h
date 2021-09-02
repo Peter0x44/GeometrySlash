@@ -39,6 +39,7 @@ public:
 	void logic(void) final override;
 	void render(void) final override;
 	ResultsScreen(void);
+	~ResultsScreen(void);
 };
 
 #endif

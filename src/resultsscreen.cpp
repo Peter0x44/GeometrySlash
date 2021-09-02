@@ -65,15 +65,6 @@ void ResultsScreen::logic(void)
 
 }
 
-Rectangle MainMenuButtonRectCallback(void)
-{
-        Rectangle tmp;
-        tmp.width = GetScreenWidth()/4.0f;
-        tmp.height = GetScreenHeight()/7.5f;
-        tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
-        tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
-        return tmp;
-}
 
 
 void ResultsScreen::render(void)
@@ -97,8 +88,44 @@ void ResultsScreen::render(void)
 ////////DrawRectangleRec(PlayAgainButtonRect, LIGHTGRAY);
 }
 
+//Rectangle MainMenuButtonRectCallback(void)
+//{
+//        Rectangle tmp;
+//        tmp.width = GetScreenWidth()/4.0f;
+//        tmp.height = GetScreenHeight()/7.5f;
+//        tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
+//        tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
+//        return tmp;
+//}
 
 ResultsScreen::ResultsScreen(void)
 {
-	MainMenuButton = new Button(&MainMenuButtonRectCallback);
+////////Rectangle MainMenuButtonRectCallback
+////////{
+////////	[](void)
+////////	{
+////////		Rectangle tmp;
+////////		tmp.width = GetScreenWidth()/4.0f;
+////////		tmp.height = GetScreenHeight()/7.5f;
+////////		tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
+////////		tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
+////////		return tmp;
+////////	}
+////////};
+	MainMenuButton = new Button (
+		[](void)
+		{
+			Rectangle tmp;
+			tmp.width = GetScreenWidth()/4.0f;
+			tmp.height = GetScreenHeight()/7.5f;
+			tmp.x = (GetScreenWidth()/3.0f)-(tmp.width/2.0f);
+			tmp.y = (GetScreenHeight()/6.0f)*4-(tmp.height/2.0f);
+			return tmp;
+		}
+	);
+}
+
+ResultsScreen::~ResultsScreen(void)
+{
+	delete MainMenuButton;
 }
