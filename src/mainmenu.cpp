@@ -9,16 +9,9 @@ void MainMenu::logic(void)
 	TitlePos.x = GetScreenWidth()/2 - TitleDims.x/2;
 	TitlePos.y = GetScreenHeight()/5 - TitleDims.y/2;
 
-	//Determine size and position of Start button and text
-	StartButton.width = (GetScreenWidth()/6)*4;
-	StartButton.height = (GetScreenHeight()/4);
-	StartButton.x = GetScreenWidth()/2 - StartButton.width/2;
-	StartButton.y = (GetScreenHeight()/3)*2 - StartButton.height/2;
-	StartDims = MeasureTextEx(GetFontDefault(), "Start", TitleFontSize, TitleFontSize/10);
-	StartPos.x = GetScreenWidth()/2 - StartDims.x/2;
-	StartPos.y = (GetScreenHeight()/3)*2 - StartDims.y/2;
+	StartButton->logic();
 
-	if (CheckCollisionPointRec(GetMousePosition(), StartButton) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	if (StartButton->clicked())
 	{
 		SetNextState(GameStates::InGame);
 	}
@@ -49,14 +42,13 @@ void MainMenu::logic(void)
 		scroller.dest.y = y;
 		// Set Y position of all of them, so it the positions stay correct when the window is resized
 	}
-
 }
 
 void MainMenu::render(void)
 {
 	DrawText("Geometry Slash " VERSION_NUMBER, TitlePos.x, TitlePos.y, TitleFontSize, RED);
-	DrawRectangleRounded(StartButton, 0.5f, 0, LIGHTGRAY);
-	DrawText("Start", StartPos.x, StartPos.y, TitleFontSize, BLACK);
+
+	StartButton->draw();
 
 	// Draw all shapes in scrolling line
 	for (const scroller& bruh: q)
@@ -64,3 +56,28 @@ void MainMenu::render(void)
 		DrawTexturePro(tiles, bruh.source, bruh.dest, Vector2{0,0}, 0.0f, WHITE);
 	}
 } 
+
+MainMenu::MainMenu(void)
+{
+	StartButton = new Button (
+		[](void)
+		{
+			Rectangle tmp;
+			tmp.width = (GetScreenWidth()/6)*4;
+			tmp.height = (GetScreenHeight()/4);
+			tmp.x = GetScreenWidth()/2 - tmp.width/2;
+			tmp.y = (GetScreenHeight()/3)*2 - tmp.height/2;
+			return tmp;
+		},
+		[](void)
+		{
+			return GetScreenHeight()/10.0f;
+		},
+		"Start"
+	);
+}
+
+MainMenu::~MainMenu(void)
+{
+	delete StartButton;
+}

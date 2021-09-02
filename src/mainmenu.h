@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <deque>
 #include "globals.h"
+#include "button.h"
 #include "gamestate.h"
 
 struct scroller
@@ -25,18 +26,14 @@ private:
 	std::deque<scroller> q;
 	Vector2 TitlePos;
 	Vector2 TitleDims;
-	Vector2 StartPos;
-	Vector2 StartDims;
+	Button* StartButton;
 	int TitleFontSize;
 	double Timer = GetTime() + spawnTime; // Timer that determines how often to spawn a scrolling sprite
-
-	Rectangle StartButton;
-	
 public:
 	void logic(void) final override;
 	void render(void) final override;
+	MainMenu(void);
+	~MainMenu(void);
 };
-
-
 
 #endif
