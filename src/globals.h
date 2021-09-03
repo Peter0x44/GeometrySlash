@@ -30,5 +30,6 @@ extern uint32_t score;
 extern char username[17];
 
 extern Texture2D tiles;
+extern Image icon;
 
 #endif

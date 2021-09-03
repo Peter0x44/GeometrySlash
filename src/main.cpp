@@ -7,6 +7,7 @@
 #include "mainmenu.h"
 
 Texture2D tiles;
+Image icon;
 
 GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
@@ -51,11 +52,15 @@ int main(void)
 
 void LoadAssets(void)
 {
+	icon = LoadImage("assets/Icon.png");
+	SetWindowIcon(icon);
+
 	tiles = LoadTexture("assets/Tiles.png");
 	SetTextureFilter(tiles, TEXTURE_FILTER_POINT);
 }
 
 void UnloadAssets(void)
 {
+	UnloadImage(icon);
 	UnloadTexture(tiles);
 }
