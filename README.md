@@ -10,11 +10,7 @@ If you have any suggestions or bug reports, do not hesitate to create an Issue o
 
 ## Planned features:
 
-- [ ] Background Music
-- [ ] Better Contrast of background and tiles
-- [x] Scoring system
-- [ ] In-Game How to play instructions
-- [x] Limit minimum size to 800x600
+You can see a To-Do list of upcoming features in [the Projects Tab](https://github.com/Peter0x44/GeometrySlash/projects/1)
 
 ## Building (Linux/macOS)
 
