@@ -2,6 +2,7 @@
 #define GLOBALS_H
 
 #include <array>
+#include <cstdint>
 #include <raylib.h>
 
 #define VERSION_NUMBER "v0.1b"
@@ -25,7 +26,8 @@ constexpr int scrollSpeed = 2; //pixels per 60th of a second advance of scrollin
 
 constexpr double gameLength = 15.0;
 
-extern long unsigned int score;
+extern uint32_t score;
+extern char username[17];
 
 extern Texture2D tiles;
 

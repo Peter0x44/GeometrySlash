@@ -2,14 +2,14 @@
 #define RESULTSSCREEN_H
 #include <functional>
 #include <cstring>
+#include "globals.h"
 #include "button.h"
 #include "gamestate.h"
 
 class ResultsScreen: public GameState
 {
 private:
-	char Username[17] = "Username"; 
-	int letterCount = std::strlen(Username);
+	int letterCount = 3;
 	
 	int framesCounter = 0;
 

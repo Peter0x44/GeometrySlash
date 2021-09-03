@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdint>
 #include <raylib.h>
 #include "globals.h"
 #include "gamestate.h"
@@ -11,7 +12,8 @@ GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
 GameStates NextState = GameStates::Null;
 
-long unsigned int score = 0;
+uint32_t score = 0;
+char username[17] = "Username";
 
 void LoadAssets(void);
 void UnloadAssets(void);

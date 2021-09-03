@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "network.h"
 #include "gamestate.h"
 #include "resultsscreen.h"
 #include "button.h"
@@ -46,7 +47,7 @@ void ResultsScreen::logic(void)
 	}
 	else if (PostScoreButton->clicked())
 	{
-		// TODO call curl and send scores to the server
+		PostScores();
 	}
 
 
@@ -59,10 +60,10 @@ void ResultsScreen::logic(void)
 	while (key > 0)
 	{
 		// NOTE: Only allow keys in range [32..125]
-		if ((key >= 32) && (key <= 125) && (letterCount < sizeof(Username) - 1))
+		if ((key >= 32) && (key <= 125) && (letterCount < sizeof(username) - 1))
 		{
-			Username[letterCount] = (char)key;
-			Username[letterCount+1] = '\0'; // Add null terminator at the end of the string.
+			username[letterCount] = (char)key;
+			username[letterCount+1] = '\0'; // Add null terminator at the end of the string.
 			letterCount++;
 		}
 
@@ -73,7 +74,7 @@ void ResultsScreen::logic(void)
 	{
 		letterCount--;
 		if (letterCount < 0) letterCount = 0;
-		Username[letterCount] = '\0';
+		username[letterCount] = '\0';
 	}
 
 	framesCounter++;
@@ -88,12 +89,12 @@ void ResultsScreen::render(void)
 	DrawRectangleRounded(textBox, 0.5f, 0, LIGHTGRAY);
 	DrawRectangleRoundedLines(textBox, 0.5f, 0, 2.0f, MAROON);
 
-	DrawText(Username, textBox.x + 5, textBox.y + 8, UsernameFontSize, MAROON);
+	DrawText(username, textBox.x + 5, textBox.y + 8, UsernameFontSize, MAROON);
 
-	if (letterCount < sizeof(Username) - 1)
+	if (letterCount < sizeof(username) - 1)
 	{
 		// Draw blinking underscore char
-		if (((framesCounter/30)%2) == 0) DrawText("_", textBox.x + 8 + MeasureText(Username, UsernameFontSize), textBox.y + 12, UsernameFontSize, MAROON);
+		if (((framesCounter/30)%2) == 0) DrawText("_", textBox.x + 8 + MeasureText(username, UsernameFontSize), textBox.y + 12, UsernameFontSize, MAROON);
 	}
 
 	MainMenuButton->draw();
@@ -169,6 +170,7 @@ ResultsScreen::ResultsScreen(void)
 
 ResultsScreen::~ResultsScreen(void)
 {
+	letterCount = 8;
 	delete MainMenuButton;
 	delete PostScoreButton;
 	delete LeaderboardButton;
