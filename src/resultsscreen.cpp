@@ -45,7 +45,7 @@ void ResultsScreen::logic(void)
 	{
 		// TODO make this button work when leaderboard screen is done
 	}
-	else if (PostScoreButton->clicked())
+	else if (PostScoreButton->clicked() && letterCount > 0)
 	{
 		PostScores();
 	}
