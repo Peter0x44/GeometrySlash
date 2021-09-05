@@ -12,10 +12,6 @@ set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
 set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE) # don't build curl executable, only library
 set(HTTP_ONLY ON CACHE BOOL "" FORCE) # only http support is needed
 
-if(APPLE)
-	set(CMAKE_USE_SECTRANSP ON) # Deprecated darwinssl stuff from MacOS 10.3, no idea how to build with OpenSSL
-endif()
-
 add_subdirectory(libs/raylib)
 add_subdirectory(libs/curl)
 
