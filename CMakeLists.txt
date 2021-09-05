@@ -35,5 +35,7 @@ add_executable(GeometrySlash
 	src/button.h
 	src/network.cpp
 	src/network.h
+	src/leaderboard.cpp
+	src/leaderboard.h
 )
 target_link_libraries(GeometrySlash PRIVATE raylib libcurl)
