@@ -14,17 +14,18 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - {
-            name: "Windows Latest MinGW", artifact: "Windows-MinGW.7z",
+          - {
+            name: "Windows Latest MSVC", artifact: "Windows-MSVC.7z",
             os: windows-latest,
-            cc: "gcc", cxx: "g++"
+            cc: "cl", cxx: "cl",
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
-        - {
+          - {
             name: "Ubuntu Latest GCC", artifact: "Linux.7z",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++"
           }
-        - {
+          - {
             name: "macOS Latest Clang", artifact: "macOS.7z",
             os: macos-latest,
             cc: "clang", cxx: "clang++"
@@ -94,16 +95,6 @@ jobs:
           set(path_separator ";")
         endif()
         set(ENV{PATH} "$ENV{GITHUB_WORKSPACE}${path_separator}$ENV{PATH}")
-        if ("${{ runner.os }}" STREQUAL "Windows")
-        execute_process(
-          COMMAND cmake
-            -S .
-            -B build
-            -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
-            -G "MinGW Makefiles"
-          RESULT_VARIABLE result
-        )
-        endif()
         execute_process(
           COMMAND cmake
             -S .
