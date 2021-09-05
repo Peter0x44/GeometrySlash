@@ -1,4 +1,6 @@
 #include <raylib.h>
+#include <iostream>
+#include <string>
 #include "network.h"
 #include "gamestate.h"
 #include "resultsscreen.h"
@@ -43,7 +45,8 @@ void ResultsScreen::logic(void)
 	}
 	else if (LeaderboardButton->clicked())
 	{
-		// TODO make this button work when leaderboard screen is done
+		std::string bruh = GetScores();
+		std::cout << bruh << std::endl;
 	}
 	else if (PostScoreButton->clicked() && letterCount > 0)
 	{
@@ -170,7 +173,6 @@ ResultsScreen::ResultsScreen(void)
 
 ResultsScreen::~ResultsScreen(void)
 {
-	letterCount = 8;
 	delete MainMenuButton;
 	delete PostScoreButton;
 	delete LeaderboardButton;
