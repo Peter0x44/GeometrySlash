@@ -145,8 +145,7 @@ jobs:
         Remove-Item -Recurse -Force libs/
         Remove-Item -Recurse -Force *.cmake
     - name: Remove unnecessary files from the build
-      if: runner.os == 'Linux'
-      or: runner.os == 'macOS'
+      if: runner.os == 'unix'
       run: |
         cd build/
         rm -rf libs/
