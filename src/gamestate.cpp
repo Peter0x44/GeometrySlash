@@ -2,6 +2,7 @@
 #include "gamestate.h"
 #include "ingame.h"
 #include "resultsscreen.h"
+#include "leaderboard.h"
 
 extern GameState* CurrentState;
 extern GameStates StateID;
@@ -23,6 +24,9 @@ void ChangeState(void)
 				break;
 			case GameStates::ResultsScreen:
 				CurrentState = new ResultsScreen();
+				break;
+			case GameStates::Leaderboard:
+				CurrentState = new Leaderboard();
 				break;
 			case GameStates::Null:
 				break;

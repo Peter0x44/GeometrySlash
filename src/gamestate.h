@@ -8,7 +8,8 @@ enum class GameStates
 	Null, // Used to indicate there is no state to change
 	MainMenu,
 	InGame,
-	ResultsScreen
+	ResultsScreen,
+	Leaderboard
 };
 
 struct GameState

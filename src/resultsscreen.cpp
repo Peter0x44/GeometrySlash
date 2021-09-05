@@ -45,8 +45,7 @@ void ResultsScreen::logic(void)
 	}
 	else if (LeaderboardButton->clicked())
 	{
-		std::string bruh = GetScores();
-		std::cout << bruh << std::endl;
+		SetNextState(GameStates::Leaderboard);
 	}
 	else if (PostScoreButton->clicked() && letterCount > 0)
 	{
