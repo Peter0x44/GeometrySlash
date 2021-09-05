@@ -138,17 +138,17 @@ jobs:
           message("::error::${error_message}")
           message(FATAL_ERROR "Build failed")
         endif()
-#    - name: Remove unnecessary files from the build (Windows because Windows is stupid)
-#      if: runner.os == 'Windows'
-#      run: |
-#        cd build/
-#        Remove-Item -Recurse -Force libs/
-#        Remove-Item -Recurse -Force *.cmake
-    - name: Remove unnecessary files from the build
+
+    - name: Remove unnecessary files from the build and move assets/ into build folder
       run: |
         cd build/
         rm -rf libs/
         rm -rf *.cmake
+        rm -f Makefile
+        rm -rf CMakeFiles/
+        rm -f CMakeCache.txt
+        cd ../
+        mv assets/ build/
       shell: bash
 
     - name: Upload artifacts
