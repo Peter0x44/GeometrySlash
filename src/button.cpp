@@ -13,7 +13,7 @@ bool Button::clicked(void)
 
 void Button::draw(void)
 {
-	DrawRectangleRounded(_Rect, 0.5f, 0, LIGHTGRAY);
+	DrawRectangleRounded(_Rect, 0.5f, 90.0f*16.0f, LIGHTGRAY);
 	DrawTextEx(GetFontDefault(), _Text.c_str(), _TextPos, _FontSize, _FontSize/10, BLACK);
 }
 
