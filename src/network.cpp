@@ -1,7 +1,16 @@
 #include <curl/curl.h>
+#include <cstdint>
 
 #include "network.h"
-#include "globals.h"
+
+// Cannot include raylib.h here, or globals.h because it includes raylib.h
+// These conflict with windows.h, which is included by curl/curl.h
+extern uint32_t score;
+extern char username[17];
+extern "C"
+{
+	const char *TextFormat(const char *text, ...);
+}
 
 void PostScores(void)
 {
