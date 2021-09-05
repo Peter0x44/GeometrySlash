@@ -139,6 +139,7 @@ jobs:
           message(FATAL_ERROR "Build failed")
         endif()
     - name: Remove unnecessary files from the build (Windows because Windows is stupid)
+      if: runner.os == 'Windows'
       run: |
         cd build/
         Remove-Item -Recurse -Force libs/
