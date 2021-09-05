@@ -5,6 +5,7 @@
 #include "gamestate.h"
 #include "ingame.h"
 #include "mainmenu.h"
+#include "leaderboard.h"
 
 Texture2D tiles;
 Image icon;
@@ -27,7 +28,7 @@ int main(void)
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
 
-	CurrentState = new MainMenu();
+	CurrentState = new Leaderboard();
 
 	// Main game loop
 	while (!WindowShouldClose())

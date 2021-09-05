@@ -11,7 +11,7 @@
 #include "gamestate.h"
 
 void Leaderboard::logic(void)
-{	
+{
 	if (MainMenuButton->clicked())
 	{
 		SetNextState(GameStates::MainMenu);
@@ -24,14 +24,14 @@ void Leaderboard::logic(void)
 	{
 		SetNextState(GameStates::ResultsScreen);
 	}
-	
+
 	MainMenuButton->logic();
 	PlayAgainButton->logic();
 	BackButton->logic();
 	PrevPageButton->logic();
 	NextPageButton->logic();
 
-	Backboard = 
+	Backboard =
 	{
 		GetScreenWidth()/8.0f,
 		GetScreenHeight()/40.0f,
@@ -39,8 +39,8 @@ void Leaderboard::logic(void)
 		GetScreenHeight()/6.0f*4.0f
 	};
 
-	PlayerBackboard = 
-	{	
+	PlayerBackboard =
+	{
 		GetScreenWidth()/8.0f,
 		(GetScreenHeight()/1.5f)+(GetScreenHeight()/15.0f),
 		GetScreenWidth()/8.0f*6.0f,
@@ -48,7 +48,7 @@ void Leaderboard::logic(void)
 	};
 
 	//use the 4 elements of a Rectangle as start/end points and width of the line
-	Vline1 = 
+	Vline1 =
 	{
 		GetScreenWidth()/4.0f + GetScreenWidth()/40.0f, //startX
 		GetScreenHeight()/40.0f, //startY
@@ -58,12 +58,11 @@ void Leaderboard::logic(void)
 
 	Vline2 =
 	{
-		GetScreenWidth()/2.0f + GetScreenWidth()/10.0f + GetScreenWidth()/20.0f, //startX
+		GetScreenWidth()/2.0f + GetScreenWidth()/10.0f,// + GetScreenWidth()/20.0f, //startX
 		GetScreenHeight()/40.0f,
 		0,
 		GetScreenHeight()/1.25f
 	};
-	
 }
 
 void Leaderboard::render(void)
@@ -77,8 +76,45 @@ void Leaderboard::render(void)
 	DrawRectangleRounded(PlayerBackboard, 0.5f, 90.0f*16.0f, LIGHTGRAY);
 	DrawLineEx(Vector2{Vline1.x, Vline1.y}, Vector2{Vline1.x, Vline1.y+Vline1.height}, 4.0f, DARKGRAY);
 	DrawLineEx(Vector2{Vline2.x, Vline2.y}, Vector2{Vline2.x, Vline2.y+Vline2.height}, 4.0f, DARKGRAY);
-	DrawText("1 of 69420", Backboard.x, Backboard.y+Backboard.height, GetScreenHeight()/30, LIGHTGRAY);
+	DrawText(TextFormat("%d of 69420", page), Backboard.x, Backboard.y+Backboard.height, GetScreenHeight()/30, LIGHTGRAY);
 	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
+
+	for (int i = 0; i < 10; ++i)
+	{
+		DrawTextEx(
+			GetFontDefault(),
+			TextFormat("%d", i+1),
+			{
+				Vline1.x-(MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Vline1.y+((MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*i)
+			},
+			GetScreenHeight()/20,
+			GetScreenHeight()/200,
+			BLACK
+		);
+		DrawTextEx(
+			GetFontDefault(),
+			usernames[i].c_str(),
+			{
+				Vline2.x-(MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Vline2.y+((MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*i)
+			},
+			GetScreenHeight()/20,
+			GetScreenHeight()/200,
+			BLACK
+		);
+		DrawTextEx(
+			GetFontDefault(),
+			scores[i].c_str(),
+			{
+				Backboard.x+Backboard.width-(MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Backboard.y+((MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*i)
+			},
+			GetScreenHeight()/20,
+			GetScreenHeight()/200,
+			BLACK
+		);
+	}
 }
 
 Leaderboard::Leaderboard(void)
@@ -89,22 +125,11 @@ Leaderboard::Leaderboard(void)
 	std::string buf;
 	std::stringstream ss(csv);
 
-	std::vector<std::string> usernames;
-	std::vector<uint32_t> scores;
 	while(std::getline(ss, buf, ','))
 	{
 		usernames.push_back(buf);
 		std::getline(ss, buf, '\n');
-		scores.push_back(std::stoul(buf));
-	}
-
-	for (const std::string& bruh : usernames)
-	{
-		std::cout << bruh << std::endl;
-	}
-	for (const uint32_t& bruh : scores)
-	{
-		std::cout << bruh << std::endl;
+		scores.push_back(buf);
 	}
 
 	// Instantiate UI buttons
@@ -181,7 +206,7 @@ Leaderboard::Leaderboard(void)
 		fontSizeCallback,
 		"Next"
 	);
-	
+
 }
 
 Leaderboard::~Leaderboard(void)

@@ -12,6 +12,9 @@ class Leaderboard: public GameState
 {
 private:
 	std::string csv;
+	std::vector<std::string> usernames;
+	std::vector<std::string> scores;
+	int page = 1;
 
 	//IMGUI Variables
 
