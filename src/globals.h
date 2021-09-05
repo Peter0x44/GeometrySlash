@@ -1,7 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#include <array>
 #include <cstdint>
 #include <raylib.h>
 
