@@ -139,6 +139,11 @@ jobs:
           message(FATAL_ERROR "Build failed")
         endif()
 
+    - name: Remove unnecessary files from the build
+      run: |
+        rm -rf libs/
+        rm -rf *.cmake
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
