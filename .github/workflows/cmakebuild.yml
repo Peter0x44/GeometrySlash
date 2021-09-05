@@ -138,9 +138,14 @@ jobs:
           message("::error::${error_message}")
           message(FATAL_ERROR "Build failed")
         endif()
-
+    - name: Remove unnecessary files from the build (Windows because Windows is stupid)
+      run: |
+        cd build/
+        Remove-Item -Recurse -Force libs/
+        Remove-Item -Recurse -Force *.cmake
     - name: Remove unnecessary files from the build
       run: |
+        cd build/
         rm -rf libs/
         rm -rf *.cmake
 
