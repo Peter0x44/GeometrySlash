@@ -2,9 +2,10 @@
 #define NETWORK_H
 
 #include <cstddef>
+#include <string>
 
 void PostScores(void);
-char* GetScores(void);
+std::string& GetScores(void);
 
 constexpr const char* PostEndpoint = "http://localhost:3000/submit";
 constexpr const char* GetEndpoint = "http://localhost:3000/top";
