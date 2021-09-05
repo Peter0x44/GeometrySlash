@@ -43,7 +43,12 @@ void ResultsScreen::logic(void)
 	}
 	else if (LeaderboardButton->clicked())
 	{
-		// TODO make this button work when leaderboard screen is done
+		char* bruh = GetScores();
+		if (bruh)
+		{
+			printf("%s", bruh);
+			free(bruh);
+		}
 	}
 	else if (PostScoreButton->clicked() && letterCount > 0)
 	{
@@ -170,7 +175,6 @@ ResultsScreen::ResultsScreen(void)
 
 ResultsScreen::~ResultsScreen(void)
 {
-	letterCount = 8;
 	delete MainMenuButton;
 	delete PostScoreButton;
 	delete LeaderboardButton;
