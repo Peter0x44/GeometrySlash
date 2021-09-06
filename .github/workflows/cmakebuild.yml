@@ -145,14 +145,14 @@ jobs:
           mv assets/ build/
         endif()
         if ("${{ runner.os }}" STREQUAL "Linux" || "${{ runner.os }}" STREQUAL "macOS")
-        cd build/
-        rm -rf libs/
-        rm -rf *.cmake
-        rm -f Makefile
-        rm -rf CMakeFiles/
-        rm -f CMakeCache.txt
-        cd ../
-        mv assets/ build/
+          cd build/
+          rm -rf libs/
+          rm -rf *.cmake
+          rm -f Makefile
+          rm -rf CMakeFiles/
+          rm -f CMakeCache.txt
+          cd ../
+          mv assets/ build/
         endif()
       shell: bash
 
