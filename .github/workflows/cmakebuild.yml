@@ -145,7 +145,7 @@ jobs:
       shell: bash
       
     - name: Remove unnecessary files from the build and move assets/ into build folder
-      if: !runner.os == 'Windows'
+      if: false == runner.os == 'Windows'
       run: |
           cd build/
           rm -rf libs/
