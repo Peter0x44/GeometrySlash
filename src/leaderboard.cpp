@@ -79,7 +79,7 @@ void Leaderboard::render(void)
 	DrawText(TextFormat("%d of 69420", page), Backboard.x, Backboard.y+Backboard.height, GetScreenHeight()/30, LIGHTGRAY);
 	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 10 && i < usernames.size(); ++i)
 	{
 		DrawTextEx(
 			GetFontDefault(),
