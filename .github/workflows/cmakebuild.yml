@@ -142,11 +142,10 @@ jobs:
           mv GeometrySlash.exe ../
           cd ../
           rm -rf x64/
-          mv assets/ build/
       shell: bash
       
     - name: Remove unnecessary files from the build and move assets/ into build folder
-      if: "!runner.os == 'Windows'"
+      if: !runner.os == 'Windows'
       run: |
           cd build/
           rm -rf libs/
