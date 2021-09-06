@@ -1,4 +1,3 @@
-# Come on GitHub, work!
 name: CMake Build
 
 on: [push, pull_request]
