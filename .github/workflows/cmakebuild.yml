@@ -132,6 +132,19 @@ jobs:
 
     - name: Remove unnecessary files from the build and move assets/ into build folder
       run: |
+        if ("${{ runner.os }}" STREQUAL "Windows")
+          cd build/
+          rm -rf *.sln
+          rm -rf *.vcxproj
+          rm -rf *.filters
+          rm -rf GeometrySlash.dir/
+          cd Release/
+          mv GeometrySlash.exe ../
+          cd ../
+          rm -rf x64/
+          mv assets/ build/
+        endif()
+        if ("${{ runner.os }}" STREQUAL "Linux" || "${{ runner.os }}" STREQUAL "macOS")
         cd build/
         rm -rf libs/
         rm -rf *.cmake
@@ -140,6 +153,7 @@ jobs:
         rm -f CMakeCache.txt
         cd ../
         mv assets/ build/
+        endif()
       shell: bash
 
     - name: Upload artifacts
