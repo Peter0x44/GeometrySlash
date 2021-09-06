@@ -106,6 +106,7 @@ void InGame::logic(void)
 				board.cells[i.x][i.y].color = Colors::Empty;
 				board.cells[i.x][i.y].shape = Shapes::Empty;
 			}
+			PlaySound(bruhGamingSFX);
 			scoreToAdd = Chain.size()*Chain.size();
 			ScoreToAddPos = GetMousePosition();
 			ScoreLifetime = 1.5f;

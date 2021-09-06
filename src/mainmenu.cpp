@@ -14,6 +14,7 @@ void MainMenu::logic(void)
 	if (StartButton->clicked())
 	{
 		SetNextState(GameStates::InGame);
+		PlaySound(gamestartSFX);
 	}
 
 	if (GetTime() > Timer)

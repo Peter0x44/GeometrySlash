@@ -9,6 +9,10 @@
 Texture2D tiles;
 Image icon;
 
+Sound bruhGamingSFX;
+Sound quackSFX;
+Sound gamestartSFX;
+
 GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
 GameStates NextState = GameStates::Null;
@@ -21,6 +25,7 @@ void UnloadAssets(void);
 
 int main(void)
 {
+	InitAudioDevice();
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	InitWindow(screenWidth, screenHeight, "Geometry Slash");
 	SetTargetFPS(60);
@@ -57,10 +62,17 @@ void LoadAssets(void)
 
 	tiles = LoadTexture("assets/Tiles.png");
 	SetTextureFilter(tiles, TEXTURE_FILTER_POINT);
+
+	bruhGamingSFX = LoadSound("assets/bruh.mp3");
+	quackSFX = LoadSound("assets/quack.mp3");
+	gamestartSFX = LoadSound("assets/gamestart.mp3");
 }
 
 void UnloadAssets(void)
 {
 	UnloadImage(icon);
 	UnloadTexture(tiles);
+	UnloadSound(bruhGamingSFX);
+	UnloadSound(quackSFX);
+	UnloadSound(gamestartSFX);
 }

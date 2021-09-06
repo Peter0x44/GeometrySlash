@@ -35,6 +35,8 @@ void ResultsScreen::logic(void)
 	PlayAgainButton->logic();
 	
 
+	PlaySound(quackSFX);
+
 	if (MainMenuButton->clicked())
 	{
 		SetNextState(GameStates::MainMenu);

@@ -31,4 +31,11 @@ extern char username[17];
 extern Texture2D tiles;
 extern Image icon;
 
+extern Sound bruhGamingSFX;
+
+extern Sound quackSFX;
+
+extern Sound gamestartSFX;
+
+
 #endif
