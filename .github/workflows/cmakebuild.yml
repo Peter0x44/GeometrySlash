@@ -143,8 +143,7 @@ jobs:
           cd ../
           rm -rf x64/
           mv assets/ build/
-        endif()
-        if ("${{ runner.os }}" STREQUAL "Linux" || "${{ runner.os }}" STREQUAL "macOS")
+        else
           cd build/
           rm -rf libs/
           rm -rf *.cmake
