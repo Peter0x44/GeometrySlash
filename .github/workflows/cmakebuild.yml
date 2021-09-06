@@ -99,7 +99,7 @@ jobs:
           COMMAND cmake
             -S .
             -B build
-            -DCMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
+            -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
@@ -117,7 +117,7 @@ jobs:
           endforeach()
         endif()
         execute_process(
-          COMMAND cmake --build build
+          COMMAND cmake --build build --config Release
           RESULT_VARIABLE result
           OUTPUT_VARIABLE output
           ERROR_VARIABLE output
