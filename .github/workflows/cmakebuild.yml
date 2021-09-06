@@ -117,7 +117,7 @@ jobs:
           endforeach()
         endif()
         execute_process(
-          COMMAND cmake --build build
+          COMMAND cmake --build build --config Release
           RESULT_VARIABLE result
           OUTPUT_VARIABLE output
           ERROR_VARIABLE output
@@ -129,17 +129,32 @@ jobs:
           message("::error::${error_message}")
           message(FATAL_ERROR "Build failed")
         endif()
-
-    - name: Remove unnecessary files from the build and move assets/ into build folder
+    
+    - name: Remove unnecessary files from the build and move assets/ into build folder (Windows)
+      if: runner.os == 'Windows'
       run: |
-        cd build/
-        rm -rf libs/
-        rm -rf *.cmake
-        rm -f Makefile
-        rm -rf CMakeFiles/
-        rm -f CMakeCache.txt
-        cd ../
-        mv assets/ build/
+          cd build/
+          rm -rf *.sln
+          rm -rf *.vcxproj
+          rm -rf *.filters
+          rm -rf GeometrySlash.dir/
+          cd Release/
+          mv GeometrySlash.exe ../
+          cd ../
+          rm -rf x64/
+      shell: bash
+      
+    - name: Remove unnecessary files from the build and move assets/ into build folder
+      if: runner.os == 'Linux' || runner.os == 'macOS'
+      run: |
+          cd build/
+          rm -rf libs/
+          rm -rf *.cmake
+          rm -f Makefile
+          rm -rf CMakeFiles/
+          rm -f CMakeCache.txt
+          cd ../
+          mv assets/ build/
       shell: bash
 
     - name: Upload artifacts

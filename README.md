@@ -1,4 +1,5 @@
 # Geometry Slash
+[![CMake Build](https://github.com/Peter0x44/GeometrySlash/actions/workflows/cmakebuild.yml/badge.svg)](https://github.com/Peter0x44/GeometrySlash/actions/workflows/cmakebuild.yml)
 
 A simple game made in c++ using the raylib graphics library
 
