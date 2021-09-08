@@ -96,10 +96,10 @@ void Leaderboard::render(void)
 	{
 		DrawTextEx(
 			GetFontDefault(),
-			TextFormat("%d", i+1),
+			TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1),
 			{
-				Vline1.x-(MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline1.y+((MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Vline1.x-(MeasureTextEx(GetFontDefault(), TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Vline1.y+((MeasureTextEx(GetFontDefault(), TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,
