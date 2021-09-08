@@ -253,11 +253,6 @@ void Leaderboard::RequestScores(int page)
 		std::getline(ss, buf, '\n');
 		scores.push_back(buf);
 	}
-	for (const std::string& bruh : usernames)
-	{
-		std::cout << bruh << std::endl;
-	}
-	std::cout << std::endl;
 }
 
 
