@@ -38,4 +38,6 @@ add_executable(GeometrySlash
 	src/leaderboard.cpp
 	src/leaderboard.h
 )
+
+add_compile_options(GeometrySlash PRIVATE "-Wall -Wextra")
 target_link_libraries(GeometrySlash PRIVATE raylib libcurl)

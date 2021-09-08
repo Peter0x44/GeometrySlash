@@ -1,5 +1,7 @@
 #include <string>
+#include <cmath>
 #include <sstream>
+#include <limits>
 #include <vector>
 #include <iostream>
 #include <cstddef>
@@ -23,6 +25,16 @@ void Leaderboard::logic(void)
 	else if (BackButton->clicked())
 	{
 		SetNextState(GameStates::ResultsScreen);
+	}
+	else if (NextPageButton->clicked())
+	{
+		if (currentPage != pageCount) ++currentPage;
+		if (currentPage > pageRequestWasMadeOn + 5) RequestScores();
+	}
+	else if (PrevPageButton->clicked())
+	{
+		if (currentPage > 0) --currentPage;
+		if (currentPage < pageRequestWasMadeOn) RequestScores();
 	}
 
 	MainMenuButton->logic();
@@ -76,17 +88,18 @@ void Leaderboard::render(void)
 	DrawRectangleRounded(PlayerBackboard, 0.5f, 90.0f*16.0f, LIGHTGRAY);
 	DrawLineEx(Vector2{Vline1.x, Vline1.y}, Vector2{Vline1.x, Vline1.y+Vline1.height}, 4.0f, DARKGRAY);
 	DrawLineEx(Vector2{Vline2.x, Vline2.y}, Vector2{Vline2.x, Vline2.y+Vline2.height}, 4.0f, DARKGRAY);
-	DrawText(TextFormat("%d of 69420", page), Backboard.x, Backboard.y+Backboard.height, GetScreenHeight()/30, LIGHTGRAY);
+	DrawText(TextFormat("%d of %d",currentPage+1, pageCount+1), Backboard.x, Backboard.y+Backboard.height, GetScreenHeight()/30, LIGHTGRAY);
 	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
-
-	for (int i = 0; i < 10 && i < usernames.size(); ++i)
+	const int positionWithinRequest = currentPage % 5 * scoresPerPage;
+	int scorePos = 0;
+	for (int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i)
 	{
 		DrawTextEx(
 			GetFontDefault(),
 			TextFormat("%d", i+1),
 			{
 				Vline1.x-(MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline1.y+((MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*i)
+				Vline1.y+((MeasureTextEx(GetFontDefault(), TextFormat("%d", i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,
@@ -97,7 +110,7 @@ void Leaderboard::render(void)
 			usernames[i].c_str(),
 			{
 				Vline2.x-(MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline2.y+((MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*i)
+				Vline2.y+((MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,
@@ -108,29 +121,19 @@ void Leaderboard::render(void)
 			scores[i].c_str(),
 			{
 				Backboard.x+Backboard.width-(MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Backboard.y+((MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*i)
+				Backboard.y+((MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,
 			BLACK
 		);
+		++scorePos;
 	}
 }
 
 Leaderboard::Leaderboard(void)
 {
-	// Parse leaderboard entries
-	csv = GetScores();
-
-	std::string buf;
-	std::stringstream ss(csv);
-
-	while(std::getline(ss, buf, ','))
-	{
-		usernames.push_back(buf);
-		std::getline(ss, buf, '\n');
-		scores.push_back(buf);
-	}
+	RequestScores();
 
 	// Instantiate UI buttons
 	auto fontSizeCallback
@@ -208,6 +211,49 @@ Leaderboard::Leaderboard(void)
 	);
 
 }
+
+void Leaderboard::RequestScores(void)
+{
+	pageRequestWasMadeOn = currentPage;
+
+	usernames.clear();
+	scores.clear();
+
+	// Parse leaderboard entries
+	csv = GetScores(currentPage);
+
+	std::string buf;
+	std::stringstream ss(csv);
+
+	ss.ignore(std::numeric_limits<std::streamsize>::max(), ','); // discard "count," text
+	std::getline(ss, buf, '\n'); // Read total number of scores
+
+	try
+	{
+		// Convert from string to integer
+		// Wrap in a try...catch block because std::stoi can throw an exception
+		const int scoresCount = std::stoi(buf);
+		// calculate total number of pages
+		// there are 10 scores on each page
+		pageCount = std::ceil(scoresCount / scoresPerPage);
+	}
+	catch (...)
+	{
+		// Well, rip converting to an integer failed
+		// Probably the GET request did too.
+		// There isn't really anything useful that can be done here
+		// TODO either prevent state switching to begin with or go back to leaderboard screen
+		pageCount = 0;
+	}
+
+	while(std::getline(ss, buf, ','))
+	{
+		usernames.push_back(buf);
+		std::getline(ss, buf, '\n');
+		scores.push_back(buf);
+	}
+}
+
 
 Leaderboard::~Leaderboard(void)
 {

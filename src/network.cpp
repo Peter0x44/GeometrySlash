@@ -49,7 +49,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 	return realsize;
 }
 
-std::string& GetScores(void)
+std::string& GetScores(int page)
 {
 	CURL *curl_handle;
 	CURLcode res;
@@ -60,7 +60,8 @@ std::string& GetScores(void)
 	curl_handle = curl_easy_init();
 
 	/* specify URL to get */
-	curl_easy_setopt(curl_handle, CURLOPT_URL, GetEndpoint);
+//	curl_easy_setopt(curl_handle, CURLOPT_URL, GetEndpoint);
+	curl_easy_setopt(curl_handle, CURLOPT_URL, TextFormat("http://localhost:3000/top?from=%d", page*10));
 
 	/* send all data to this function */
 	curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);

@@ -4,7 +4,7 @@
 #include <string>
 
 void PostScores(void);
-std::string& GetScores(void);
+std::string& GetScores(int page);
 
 constexpr const char* PostEndpoint = "http://localhost:3000/submit";
 constexpr const char* GetEndpoint = "http://localhost:3000/top";

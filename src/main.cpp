@@ -28,7 +28,7 @@ int main(void)
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
 
-	CurrentState = new Leaderboard();
+	CurrentState = new MainMenu();
 
 	// Main game loop
 	while (!WindowShouldClose())
