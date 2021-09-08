@@ -29,12 +29,12 @@ void Leaderboard::logic(void)
 	else if (NextPageButton->clicked())
 	{
 		if (currentPage != pageCount) ++currentPage;
-		if (currentPage > pageRequestWasMadeOn + 5) RequestScores();
+		if (currentPage == pageRequestWasMadeOn + 5) RequestScores(pageRequestWasMadeOn + 5);
 	}
 	else if (PrevPageButton->clicked())
 	{
 		if (currentPage > 0) --currentPage;
-		if (currentPage < pageRequestWasMadeOn) RequestScores();
+		if (currentPage == pageRequestWasMadeOn - 5) RequestScores(pageRequestWasMadeOn - 5);
 	}
 
 	MainMenuButton->logic();
@@ -133,7 +133,7 @@ void Leaderboard::render(void)
 
 Leaderboard::Leaderboard(void)
 {
-	RequestScores();
+	RequestScores(0);
 
 	// Instantiate UI buttons
 	auto fontSizeCallback
@@ -212,15 +212,16 @@ Leaderboard::Leaderboard(void)
 
 }
 
-void Leaderboard::RequestScores(void)
+void Leaderboard::RequestScores(int page)
 {
-	pageRequestWasMadeOn = currentPage;
+	pageRequestWasMadeOn = page;
 
 	usernames.clear();
 	scores.clear();
+	csv.clear();
 
 	// Parse leaderboard entries
-	csv = GetScores(currentPage);
+	csv = GetScores(page);
 
 	std::string buf;
 	std::stringstream ss(csv);
@@ -252,6 +253,11 @@ void Leaderboard::RequestScores(void)
 		std::getline(ss, buf, '\n');
 		scores.push_back(buf);
 	}
+	for (const std::string& bruh : usernames)
+	{
+		std::cout << bruh << std::endl;
+	}
+	std::cout << std::endl;
 }
 
 

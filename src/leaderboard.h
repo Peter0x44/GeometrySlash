@@ -33,7 +33,7 @@ private:
 	Rectangle Vline2;
 
 public:
-	void RequestScores(void);
+	void RequestScores(int page);
 	void logic(void) final override;
 	void render(void) final override;
 	Leaderboard(void);

@@ -56,6 +56,8 @@ std::string& GetScores(int page)
 
 	static std::string response;
 
+	response.clear();
+
 	/* init the curl session */
 	curl_handle = curl_easy_init();
 
