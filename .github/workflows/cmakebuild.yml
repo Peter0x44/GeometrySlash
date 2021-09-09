@@ -146,6 +146,8 @@ jobs:
           mv GeometrySlash.exe ../
           cd ../
           rm -rf x64/
+          rm -rf libs/
+          mv assets/ build/
       shell: bash
       
     - name: Remove unnecessary files from the build and move assets/ into build folder
