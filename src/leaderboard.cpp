@@ -70,7 +70,7 @@ void Leaderboard::logic(void)
 
 	Vline2 =
 	{
-		GetScreenWidth()/2.0f + GetScreenWidth()/10.0f,// + GetScreenWidth()/20.0f, //startX
+		GetScreenWidth()/2.0f + GetScreenWidth()/10.0f + GetScreenWidth()/20.0f, //startX
 		GetScreenHeight()/40.0f,
 		0,
 		GetScreenHeight()/1.25f
@@ -88,47 +88,81 @@ void Leaderboard::render(void)
 	DrawRectangleRounded(PlayerBackboard, 0.5f, 90.0f*16.0f, LIGHTGRAY);
 	DrawLineEx(Vector2{Vline1.x, Vline1.y}, Vector2{Vline1.x, Vline1.y+Vline1.height}, 4.0f, DARKGRAY);
 	DrawLineEx(Vector2{Vline2.x, Vline2.y}, Vector2{Vline2.x, Vline2.y+Vline2.height}, 4.0f, DARKGRAY);
-	DrawTextEx(Unifont, TextFormat("%d of %d",currentPage+1, pageCount+1), Vector2{Backboard.x, Backboard.y+Backboard.height}, GetScreenHeight()/30, GetScreenHeight()/300, LIGHTGRAY);
+	DrawTextEx(Unifont, TextFormat("%d of %d",currentPage+1, pageCount+1), Vector2{Backboard.x, Backboard.y+Backboard.height}, GetScreenHeight()/30, 0, LIGHTGRAY);
 	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
 	const int positionWithinRequest = currentPage % 5 * scoresPerPage;
 	int scorePos = 0;
-	for (int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i)
+	for (int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i) //Draw leaderboard scores
 	{
-		DrawTextEx(
+		DrawTextEx( //Draw Rank
 			Unifont,	
 			TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1),
 			{
-				Vline1.x-(MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline1.y+((MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Vline1.x-(MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+				Vline1.y+((MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, 0).y + GetScreenHeight()/55)*scorePos)
 			},
 			GetScreenHeight()/20,
-			GetScreenHeight()/200,
+			0,
 			BLACK
 		);
-		DrawTextEx(
+		DrawTextEx( //Draw Username
 			Unifont,
 			usernames[i].c_str(),
 			{
-				Vline2.x-(MeasureTextEx(Unifont, usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline2.y+((MeasureTextEx(Unifont, usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Vline2.x-(MeasureTextEx(Unifont, usernames[i].c_str(), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+				Vline2.y+((MeasureTextEx(Unifont, usernames[i].c_str(), GetScreenHeight()/20, 0).y+ GetScreenHeight()/55)*scorePos)
 			},
 			GetScreenHeight()/20,
-			GetScreenHeight()/200,
+			0,
 			BLACK
 		);
-		DrawTextEx(
+		DrawTextEx( //Draw Score
 			Unifont,
 			scores[i].c_str(),
 			{
-				Backboard.x+Backboard.width-(MeasureTextEx(Unifont, scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Backboard.y+((MeasureTextEx(Unifont, scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Backboard.x+Backboard.width-(MeasureTextEx(Unifont, scores[i].c_str(), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+				Backboard.y+((MeasureTextEx(Unifont, scores[i].c_str(), GetScreenHeight()/20, 0).y+ GetScreenHeight()/55)*scorePos)
 			},
 			GetScreenHeight()/20,
-			GetScreenHeight()/200,
+			0,
 			BLACK
 		);
 		++scorePos;
 	}
+	// Draw your last score
+	DrawTextEx(
+		Unifont,
+	 	"You",
+		{
+			Vline1.x - MeasureTextEx(Unifont, "You", GetScreenHeight()/20, 0).x - GetScreenWidth()/100,
+			PlayerBackboard.y + PlayerBackboard.height/2 - MeasureTextEx(Unifont, "You", GetScreenHeight()/20, 0).y/2
+		},
+		GetScreenHeight()/20,
+		0,
+		BLACK
+	);
+	DrawTextEx(
+		Unifont,
+	 	username,
+		{
+			Vline2.x-(MeasureTextEx(Unifont, username, GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+			PlayerBackboard.y + PlayerBackboard.height/2 - MeasureTextEx(Unifont, username, GetScreenHeight()/20, 0).y/2
+		},
+		GetScreenHeight()/20,
+		0,
+		BLACK
+	);
+	DrawTextEx(
+		Unifont,
+	 	TextFormat("%d", score),
+		{
+			PlayerBackboard.x + PlayerBackboard.width - (MeasureTextEx(Unifont, TextFormat("%d", score), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+			PlayerBackboard.y + PlayerBackboard.height/2 - MeasureTextEx(Unifont, TextFormat("%d", score), GetScreenHeight()/20, 0).y/2
+		},
+		GetScreenHeight()/20,
+		0,
+		BLACK
+	);
 }
 
 Leaderboard::Leaderboard(void)
