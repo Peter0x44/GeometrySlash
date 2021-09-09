@@ -34,7 +34,7 @@ void Leaderboard::logic(void)
 	else if (PrevPageButton->clicked())
 	{
 		if (currentPage > 0) --currentPage;
-		if (currentPage == pageRequestWasMadeOn - 5) RequestScores(pageRequestWasMadeOn - 5);
+		if (currentPage < pageRequestWasMadeOn) RequestScores(pageRequestWasMadeOn - 5);
 	}
 
 	MainMenuButton->logic();
