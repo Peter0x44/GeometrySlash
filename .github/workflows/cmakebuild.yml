@@ -147,6 +147,7 @@ jobs:
           cd ../
           rm -rf x64/
           rm -rf libs/
+          cd ../
           mv assets/ build/
       shell: bash
       
