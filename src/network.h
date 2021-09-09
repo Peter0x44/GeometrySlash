@@ -3,10 +3,17 @@
 
 #include <string>
 
+void ReadURL(void);
+
 void PostScores(void);
 std::string& GetScores(int page);
 
-constexpr const char* PostEndpoint = "http://localhost:3000/submit";
-constexpr const char* GetEndpoint = "http://localhost:3000/top";
+constexpr const char* PostSuffix = "/submit";
+constexpr const char* GetSuffix = "/top?from=%d";
+
+extern std::string ServerURL;
+
+extern std::string GetEndpoint;
+extern std::string PostEndpoint;
 
 #endif

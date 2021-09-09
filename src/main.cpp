@@ -23,6 +23,12 @@ char username[17] = "Username";
 void LoadAssets(void);
 void UnloadAssets(void);
 
+void CurlInit(void);
+void CurlCleanup(void);
+void ReadURL(void);
+// Implementation of these functions lies in network.cpp
+// Didn't feel like exposing them because it just wasn't necessary
+
 int main(void)
 {
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
@@ -84,6 +90,9 @@ void LoadAssets(void)
 	SetTextureFilter(tiles, TEXTURE_FILTER_POINT);
 
 	Unifont = LoadFont("assets/Unifont.ttf");
+
+	CurlInit();
+	ReadURL();
 }
 
 void UnloadAssets(void)
@@ -91,4 +100,6 @@ void UnloadAssets(void)
 	UnloadImage(icon);
 	UnloadTexture(tiles);
 	UnloadFont(Unifont);
+
+	CurlCleanup();
 }

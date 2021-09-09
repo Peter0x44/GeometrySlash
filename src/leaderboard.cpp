@@ -167,7 +167,7 @@ void Leaderboard::render(void)
 
 Leaderboard::Leaderboard(void)
 {
-	RequestScores(0);
+	RequestScores(currentPage);
 
 	// Instantiate UI buttons
 	auto fontSizeCallback
@@ -277,7 +277,7 @@ void Leaderboard::RequestScores(int page)
 		// Well, rip converting to an integer failed
 		// Probably the GET request did too.
 		// There isn't really anything useful that can be done here
-		// TODO either prevent state switching to begin with or go back to leaderboard screen
+		// TODO either prevent state switching to begin with or go back to results screen
 		pageCount = 0;
 	}
 
