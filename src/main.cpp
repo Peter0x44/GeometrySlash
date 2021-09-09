@@ -7,6 +7,8 @@
 #include "mainmenu.h"
 #include "leaderboard.h"
 
+#define DEBUG_MENU 0
+
 Texture2D tiles;
 Image icon;
 Font Unifont;
@@ -34,7 +36,28 @@ int main(void)
 	// Main game loop
 	while (!WindowShouldClose())
 	{
+		if(DEBUG_MENU && IsKeyDown(KEY_TAB)) {
+			switch (GetKeyPressed())
+			{
+			case KEY_ONE:
+				SetNextState(GameStates::MainMenu);
+				break;
+			case KEY_TWO:
+				SetNextState(GameStates::InGame);
+				break;
+			case KEY_THREE:
+				SetNextState(GameStates::ResultsScreen);
+				break;
+			case KEY_FOUR:
+				SetNextState(GameStates::Leaderboard);
+				break;
+			default:
+				break;
+			}
+		}
+
 		CurrentState->logic();
+
 
 		BeginDrawing();
 
