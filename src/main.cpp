@@ -9,6 +9,7 @@
 
 Texture2D tiles;
 Image icon;
+Font Unifont;
 
 GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
@@ -58,10 +59,13 @@ void LoadAssets(void)
 
 	tiles = LoadTexture("assets/Tiles.png");
 	SetTextureFilter(tiles, TEXTURE_FILTER_POINT);
+
+	Unifont = LoadFont("assets/Unifont.ttf");
 }
 
 void UnloadAssets(void)
 {
 	UnloadImage(icon);
 	UnloadTexture(tiles);
+	UnloadFont(Unifont);
 }

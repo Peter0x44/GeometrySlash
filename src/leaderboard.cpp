@@ -88,40 +88,40 @@ void Leaderboard::render(void)
 	DrawRectangleRounded(PlayerBackboard, 0.5f, 90.0f*16.0f, LIGHTGRAY);
 	DrawLineEx(Vector2{Vline1.x, Vline1.y}, Vector2{Vline1.x, Vline1.y+Vline1.height}, 4.0f, DARKGRAY);
 	DrawLineEx(Vector2{Vline2.x, Vline2.y}, Vector2{Vline2.x, Vline2.y+Vline2.height}, 4.0f, DARKGRAY);
-	DrawText(TextFormat("%d of %d",currentPage+1, pageCount+1), Backboard.x, Backboard.y+Backboard.height, GetScreenHeight()/30, LIGHTGRAY);
+	DrawTextEx(Unifont, TextFormat("%d of %d",currentPage+1, pageCount+1), Vector2{Backboard.x, Backboard.y+Backboard.height}, GetScreenHeight()/30, GetScreenHeight()/300, LIGHTGRAY);
 	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
 	const int positionWithinRequest = currentPage % 5 * scoresPerPage;
 	int scorePos = 0;
 	for (int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i)
 	{
 		DrawTextEx(
-			GetFontDefault(),
+			Unifont,	
 			TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1),
 			{
-				Vline1.x-(MeasureTextEx(GetFontDefault(), TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline1.y+((MeasureTextEx(GetFontDefault(), TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Vline1.x-(MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Vline1.y+((MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,
 			BLACK
 		);
 		DrawTextEx(
-			GetFontDefault(),
+			Unifont,
 			usernames[i].c_str(),
 			{
-				Vline2.x-(MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Vline2.y+((MeasureTextEx(GetFontDefault(), usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Vline2.x-(MeasureTextEx(Unifont, usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Vline2.y+((MeasureTextEx(Unifont, usernames[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,
 			BLACK
 		);
 		DrawTextEx(
-			GetFontDefault(),
+			Unifont,
 			scores[i].c_str(),
 			{
-				Backboard.x+Backboard.width-(MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
-				Backboard.y+((MeasureTextEx(GetFontDefault(), scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
+				Backboard.x+Backboard.width-(MeasureTextEx(Unifont, scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).x) - GetScreenWidth()/100,
+				Backboard.y+((MeasureTextEx(Unifont, scores[i].c_str(), GetScreenHeight()/20, GetScreenHeight()/200).y+ GetScreenHeight()/50)*scorePos)
 			},
 			GetScreenHeight()/20,
 			GetScreenHeight()/200,

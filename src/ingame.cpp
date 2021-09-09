@@ -2,7 +2,6 @@
 #include <string.h>
 #include <raylib.h>
 #include "ingame.h"
-#include "globals.h"
 #include "random.h"
 
 void InGame::logic(void)
@@ -185,10 +184,10 @@ void InGame::DrawBoard(void)
 
 void InGame::DrawScore(void)
 {
-	ScoreDims = MeasureTextEx(GetFontDefault(), TextFormat("Score: %d", score), ScoreFontSize, ScoreFontSize/10);
+	ScoreDims = MeasureTextEx(Unifont, TextFormat("Score: %d", score), ScoreFontSize, 0);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = gridOffsetY - ScoreDims.y;
-	DrawText(TextFormat("Score: %d", score), ScorePos.x, ScorePos.y, ScoreFontSize, RED);
+	DrawTextEx(Unifont, TextFormat("Score: %d", score), ScorePos, ScoreFontSize, 0, RED);
 }
 
 void InGame::DrawScoreToAdd(void)
@@ -197,7 +196,7 @@ void InGame::DrawScoreToAdd(void)
 	if (ScoreLifetime > 0)
 	{
 		ScoreToAddColor = ColorAlpha(WHITE, ScoreLifetime/1.5f);
-		DrawText(TextFormat("+%d", scoreToAdd), ScoreToAddPos.x, ScoreToAddPos.y, ScoreFontSize, ScoreToAddColor);
+		DrawTextEx(Unifont, TextFormat("+%d", scoreToAdd), ScoreToAddPos, ScoreFontSize, 0, ScoreToAddColor);
 		ScoreToAddPos.y -= 2 * GetFrameTime() * 60;
 		ScoreLifetime -= GetFrameTime();
 	}
@@ -205,10 +204,10 @@ void InGame::DrawScoreToAdd(void)
 
 void InGame::DrawTimer(void)
 {
-	TimerDims = MeasureTextEx(GetFontDefault(), TextFormat("Time: %d", TimeLeft), ScoreFontSize, ScoreFontSize/10);
+	TimerDims = MeasureTextEx(Unifont, TextFormat("Time: %d", TimeLeft), ScoreFontSize, 0);
 	TimerPos.x = GetScreenWidth()/2 - TimerDims.x/2;
 	TimerPos.y = (gridOffsetY*2) + gridHeight - TimerDims.y;
-	DrawText(TextFormat("Time: %d", TimeLeft), TimerPos.x, TimerPos.y, ScoreFontSize, BLUE);
+	DrawTextEx(Unifont, TextFormat("Time: %d", TimeLeft), TimerPos, ScoreFontSize, 0, BLUE);
 
 }
 

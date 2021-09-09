@@ -10,19 +10,19 @@ void ResultsScreen::logic(void)
 {
 	//Determine size and position of GameOver Text
 	GameOverFontSize = GetScreenHeight()/8;
-	GameOverDims = MeasureTextEx(GetFontDefault(), "Game Over", GameOverFontSize, GameOverFontSize/10);
+	GameOverDims = MeasureTextEx(Unifont, "Game Over", GameOverFontSize, 0);
 	GameOverPos.x = GetScreenWidth()/2 - GameOverDims.x/2;
 	GameOverPos.y = GetScreenHeight()/10 - GameOverDims.y/2;
 
 	//Determine size and position of Score Text
 	ScoreFontSize = GetScreenHeight()/6;
-	ScoreDims = MeasureTextEx(GetFontDefault(), TextFormat("%d", score), ScoreFontSize, ScoreFontSize/10);
+	ScoreDims = MeasureTextEx(Unifont, TextFormat("%d", score), ScoreFontSize, 0);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = GetScreenHeight()/3 - ScoreDims.y/2;
 
 	UsernameFontSize = GetScreenHeight()/14;
 
-	MaxTextBoxDims = MeasureTextEx(GetFontDefault(), "MMMMMMMMMMMMMMMM", UsernameFontSize, UsernameFontSize/10);
+	MaxTextBoxDims = MeasureTextEx(Unifont, "MMMMMMMMMMMMMMMM", UsernameFontSize, 0);
 
 	textBox.x = GetScreenWidth()/2 - MaxTextBoxDims.x/2 - 5;
 	textBox.y = GetScreenHeight()/2 - MaxTextBoxDims.y/2 - 8;
@@ -86,17 +86,17 @@ void ResultsScreen::logic(void)
 
 void ResultsScreen::render(void)
 {
-	DrawText("Game Over", GameOverPos.x, GameOverPos.y, GameOverFontSize, MAROON);
-	DrawText(TextFormat("%d", score), ScorePos.x, ScorePos.y, ScoreFontSize, BLACK);
+	DrawTextEx(Unifont, "Game Over", GameOverPos, GameOverFontSize, 0, MAROON);
+	DrawTextEx(Unifont, TextFormat("%d", score), ScorePos, ScoreFontSize, 0, BLACK);
 	DrawRectangleRounded(textBox, 0.5f, 0, LIGHTGRAY);
 	DrawRectangleRoundedLines(textBox, 0.5f, 0, 2.0f, MAROON);
 
-	DrawText(username, textBox.x + 5, textBox.y + 8, UsernameFontSize, MAROON);
+	DrawTextEx(Unifont, username, Vector2{textBox.x + 5, textBox.y + 8}, UsernameFontSize, 0, MAROON);
 
 	if (letterCount < sizeof(username) - 1)
 	{
 		// Draw blinking underscore char
-		if (((framesCounter/30)%2) == 0) DrawText("_", textBox.x + 8 + MeasureText(username, UsernameFontSize), textBox.y + 12, UsernameFontSize, MAROON);
+		if (((framesCounter/30)%2) == 0) DrawTextEx(Unifont, "_", Vector2{textBox.x + 8 + MeasureTextEx(Unifont, username, UsernameFontSize, 0).x, textBox.y + 12}, UsernameFontSize, 0, MAROON);
 	}
 
 	MainMenuButton->draw();
@@ -111,7 +111,7 @@ ResultsScreen::ResultsScreen(void)
 	{
 		[] (void)
 		{
-			return GetScreenHeight()/20.0f;
+			return GetScreenHeight()/22.0f;
 		}
 	};
 
