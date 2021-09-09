@@ -134,6 +134,10 @@ jobs:
       if: runner.os == 'Windows'
       run: |
           cd build/
+          rm -rf *.cmake
+          rm -f Makefile
+          rm -rf CMakeFiles/
+          rm -f CMakeCache.txt
           rm -rf *.sln
           rm -rf *.vcxproj
           rm -rf *.filters
