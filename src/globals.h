@@ -23,7 +23,7 @@ constexpr double spawnTime = (1.0/60.0) * spriteSize; // Determines how often to
 
 constexpr int scrollSpeed = 2; //pixels per 60th of a second advance of scrolling sprites
 
-constexpr double gameLength = 15.0;
+constexpr double gameLength = 60.0;
 
 extern uint32_t score;
 extern char username[17];
