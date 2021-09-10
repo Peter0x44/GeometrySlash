@@ -106,6 +106,7 @@ void ResultsScreen::render(void)
 
 ResultsScreen::ResultsScreen(void)
 {
+	std::strcpy(username, "Enter username");
 	auto fontSizeCallback
 	{
 		[] (void)
