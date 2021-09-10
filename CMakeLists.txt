@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Setting parameters for raylib
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
 set(BUILD_GAMES    OFF CACHE BOOL "" FORCE) # or games
+set(OPENGL_VERSION "1.1" CACHE STRING "" FORCE)
 
 # Setting paramters for libcurl
 set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE) # don't build curl executable, only library
@@ -39,5 +40,5 @@ add_executable(GeometrySlash
 	src/leaderboard.h
 )
 
-add_compile_options(GeometrySlash PRIVATE "-Wall -Wextra")
+#add_compile_options(GeometrySlash PRIVATE "-Wall -Wextra")
 target_link_libraries(GeometrySlash PRIVATE raylib libcurl)
