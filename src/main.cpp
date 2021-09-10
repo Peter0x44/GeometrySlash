@@ -32,8 +32,8 @@ void ReadURL(void);
 int main(void)
 {
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+	SetConfigFlags(FLAG_VSYNC_HINT);
 	InitWindow(screenWidth, screenHeight, "Geometry Slash");
-	SetTargetFPS(60);
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
 
