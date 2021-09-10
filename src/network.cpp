@@ -63,7 +63,7 @@ void PostScores(void)
 	{
 		curl_easy_setopt(curl, CURLOPT_URL, PostEndpoint.c_str());
 		curl_easy_setopt(curl, CURLOPT_USERAGENT, "GeometrySlash");
-		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, TextFormat("username=%s&score=%d", username, score));
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, TextFormat("username=%s&score=%u", username, score));
 
 		res = curl_easy_perform(curl);
 		curl_easy_cleanup(curl);
@@ -80,12 +80,10 @@ void PostScores(void)
 
 static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
-	size_t realsize = size*nmemb;
-	((std::string*)userp)->append((char*)contents, realsize);
-	return realsize;
+	size_t realsize = size*nmemb; ((std::string*)userp)->append((char*)contents, realsize); return realsize;
 }
 
-std::string& GetScores(int page)
+std::string& GetScores(unsigned int page)
 {
 	CURL *curl_handle;
 	CURLcode res;

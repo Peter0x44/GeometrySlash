@@ -6,10 +6,10 @@
 void ReadURL(void);
 
 void PostScores(void);
-std::string& GetScores(int page);
+std::string& GetScores(unsigned int page);
 
 constexpr const char* PostSuffix = "/submit";
-constexpr const char* GetSuffix = "/top?from=%d";
+constexpr const char* GetSuffix = "/top?from=%u";
 
 extern std::string ServerURL;
 

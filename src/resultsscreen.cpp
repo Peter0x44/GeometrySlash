@@ -16,7 +16,7 @@ void ResultsScreen::logic(void)
 
 	//Determine size and position of Score Text
 	ScoreFontSize = GetScreenHeight()/6;
-	ScoreDims = MeasureTextEx(Unifont, TextFormat("%d", score), ScoreFontSize, 0);
+	ScoreDims = MeasureTextEx(Unifont, TextFormat("%u", score), ScoreFontSize, 0);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = GetScreenHeight()/3 - ScoreDims.y/2;
 
@@ -74,8 +74,7 @@ void ResultsScreen::logic(void)
 
 	if (IsKeyPressed(KEY_BACKSPACE))
 	{
-		letterCount--;
-		if (letterCount < 0) letterCount = 0;
+		if (letterCount != 0) letterCount--;
 		username[letterCount] = '\0';
 	}
 

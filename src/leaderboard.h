@@ -8,7 +8,8 @@
 #include "gamestate.h"
 #include "button.h"
 
-static constexpr int scoresPerPage = 10;
+static constexpr unsigned int scoresPerPage = 10;
+static constexpr unsigned int pagesPerRequest = 5;
 
 class Leaderboard: public GameState
 {
@@ -16,9 +17,9 @@ private:
 	std::string csv;
 	std::vector<std::string> usernames;
 	std::vector<std::string> scores;
-	int pageCount = 0;
-	int currentPage = 0;
-	int pageRequestWasMadeOn = 0;
+	unsigned int pageCount = 0;
+	unsigned int currentPage = 0;
+	unsigned int pageRequestWasMadeOn = 0;
 
 	//IMGUI Variables
 
@@ -33,7 +34,7 @@ private:
 	Rectangle Vline2;
 
 public:
-	void RequestScores(int page);
+	void RequestScores(unsigned int page);
 	void logic(void) final override;
 	void render(void) final override;
 	Leaderboard(void);

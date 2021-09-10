@@ -184,7 +184,7 @@ void InGame::DrawBoard(void)
 
 void InGame::DrawScore(void)
 {
-	ScoreDims = MeasureTextEx(Unifont, TextFormat("Score: %d", score), ScoreFontSize, 0);
+	ScoreDims = MeasureTextEx(Unifont, TextFormat("Score: %u", score), ScoreFontSize, 0);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = gridOffsetY - ScoreDims.y;
 	DrawTextEx(Unifont, TextFormat("Score: %d", score), ScorePos, ScoreFontSize, 0, RED);

@@ -9,7 +9,7 @@
 class ResultsScreen: public GameState
 {
 private:
-	int letterCount = 0;
+	unsigned int letterCount = 0;
 	
 	int framesCounter = 0;
 

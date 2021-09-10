@@ -29,12 +29,12 @@ void Leaderboard::logic(void)
 	else if (NextPageButton->clicked())
 	{
 		if (currentPage != pageCount) ++currentPage;
-		if (currentPage == pageRequestWasMadeOn + 5) RequestScores(pageRequestWasMadeOn + 5);
+		if (currentPage == pageRequestWasMadeOn + pagesPerRequest) RequestScores(pageRequestWasMadeOn + pagesPerRequest);
 	}
 	else if (PrevPageButton->clicked())
 	{
 		if (currentPage > 0) --currentPage;
-		if (currentPage < pageRequestWasMadeOn) RequestScores(pageRequestWasMadeOn - 5);
+		if (currentPage < pageRequestWasMadeOn) RequestScores(pageRequestWasMadeOn - pagesPerRequest);
 	}
 
 	MainMenuButton->logic();
@@ -88,11 +88,11 @@ void Leaderboard::render(void)
 	DrawRectangleRounded(PlayerBackboard, 0.5f, 90.0f*16.0f, LIGHTGRAY);
 	DrawLineEx(Vector2{Vline1.x, Vline1.y}, Vector2{Vline1.x, Vline1.y+Vline1.height}, 4.0f, DARKGRAY);
 	DrawLineEx(Vector2{Vline2.x, Vline2.y}, Vector2{Vline2.x, Vline2.y+Vline2.height}, 4.0f, DARKGRAY);
-	DrawTextEx(Unifont, TextFormat("%d of %d",currentPage+1, pageCount+1), Vector2{Backboard.x, Backboard.y+Backboard.height}, GetScreenHeight()/30, 0, LIGHTGRAY);
+	DrawTextEx(Unifont, TextFormat("%u of %u",currentPage+1, pageCount+1), Vector2{Backboard.x, Backboard.y+Backboard.height}, GetScreenHeight()/30, 0, LIGHTGRAY);
 	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
-	const int positionWithinRequest = currentPage % 5 * scoresPerPage;
+	const unsigned int positionWithinRequest = currentPage % 5 * scoresPerPage;
 	int scorePos = 0;
-	for (int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i) //Draw leaderboard scores
+	for (unsigned int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i) //Draw leaderboard scores
 	{
 		DrawTextEx( //Draw Rank
 			Unifont,	
@@ -246,7 +246,7 @@ Leaderboard::Leaderboard(void)
 
 }
 
-void Leaderboard::RequestScores(int page)
+void Leaderboard::RequestScores(unsigned int page)
 {
 	pageRequestWasMadeOn = page;
 
