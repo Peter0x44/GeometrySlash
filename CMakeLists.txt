@@ -17,6 +17,10 @@ if(APPLE)
 	set(CMAKE_USE_SECTRANSP ON) # Deprecated darwinssl stuff from MacOS 10.3, no idea how to build with OpenSSL
 endif()
 
+if(WIN32)
+	set(CMAKE_USE_SCHANNEL ON) # Required for HTTPS
+endif()
+
 add_subdirectory(libs/raylib)
 add_subdirectory(libs/curl)
 
