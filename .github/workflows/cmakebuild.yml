@@ -149,6 +149,7 @@ jobs:
           rm -rf libs/
           cd ../
           mv assets/ build/
+          printf "https://gslash.flicke.red:443\n" > build/url.txt
       shell: bash
       
     - name: Remove unnecessary files from the build and move assets/ into build folder
@@ -162,6 +163,7 @@ jobs:
           rm -f CMakeCache.txt
           cd ../
           mv assets/ build/
+          printf "https://gslash.flicke.red:443\n" > build/url.txt
       shell: bash
 
     - name: Upload artifacts
