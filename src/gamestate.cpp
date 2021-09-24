@@ -40,7 +40,7 @@ void ChangeState(void)
 	}
 }
 
-void SetNextState(GameStates NewState)
+void SetNextState(const GameStates NewState)
 {
 	NextState = NewState;
 }

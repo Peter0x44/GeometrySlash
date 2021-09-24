@@ -6,10 +6,7 @@
 
 bool Button::clicked(void)
 {
-	if (CheckCollisionPointRec(GetMousePosition(), _Rect) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-		return true;
-	else
-		return false;
+	return CheckCollisionPointRec(GetMousePosition(), _Rect) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT);
 }
 
 void Button::draw(void)

@@ -83,7 +83,7 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 	size_t realsize = size*nmemb; ((std::string*)userp)->append((char*)contents, realsize); return realsize;
 }
 
-std::string& GetScores(unsigned int page)
+std::string& GetScores(const unsigned int page)
 {
 	CURL *curl_handle;
 	CURLcode res;

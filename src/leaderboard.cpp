@@ -246,7 +246,7 @@ Leaderboard::Leaderboard(void)
 
 }
 
-void Leaderboard::RequestScores(unsigned int page)
+void Leaderboard::RequestScores(const unsigned int page)
 {
 	pageRequestWasMadeOn = page;
 
