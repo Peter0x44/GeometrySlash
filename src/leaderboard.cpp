@@ -96,10 +96,10 @@ void Leaderboard::render(void)
 	{
 		DrawTextEx( //Draw Rank
 			Unifont,	
-			TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1),
+			TextFormat("%u", (pageRequestWasMadeOn)*scoresPerPage+i+1),
 			{
-				Vline1.x-(MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
-				Vline1.y+((MeasureTextEx(Unifont, TextFormat("%d", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, 0).y + GetScreenHeight()/55)*scorePos)
+				Vline1.x-(MeasureTextEx(Unifont, TextFormat("%u", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+				Vline1.y+((MeasureTextEx(Unifont, TextFormat("%u", (pageRequestWasMadeOn)*scoresPerPage+i+1), GetScreenHeight()/20, 0).y + GetScreenHeight()/55)*scorePos)
 			},
 			GetScreenHeight()/20,
 			0,
@@ -154,10 +154,10 @@ void Leaderboard::render(void)
 	);
 	DrawTextEx(
 		Unifont,
-	 	TextFormat("%d", score),
+	 	TextFormat("%u", score),
 		{
-			PlayerBackboard.x + PlayerBackboard.width - (MeasureTextEx(Unifont, TextFormat("%d", score), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
-			PlayerBackboard.y + PlayerBackboard.height/2 - MeasureTextEx(Unifont, TextFormat("%d", score), GetScreenHeight()/20, 0).y/2
+			PlayerBackboard.x + PlayerBackboard.width - (MeasureTextEx(Unifont, TextFormat("%u", score), GetScreenHeight()/20, 0).x) - GetScreenWidth()/100,
+			PlayerBackboard.y + PlayerBackboard.height/2 - MeasureTextEx(Unifont, TextFormat("%u", score), GetScreenHeight()/20, 0).y/2
 		},
 		GetScreenHeight()/20,
 		0,

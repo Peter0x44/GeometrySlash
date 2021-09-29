@@ -86,7 +86,7 @@ void ResultsScreen::logic(void)
 void ResultsScreen::render(void)
 {
 	DrawTextEx(Unifont, "Game Over", GameOverPos, GameOverFontSize, 0, MAROON);
-	DrawTextEx(Unifont, TextFormat("%d", score), ScorePos, ScoreFontSize, 0, BLACK);
+	DrawTextEx(Unifont, TextFormat("%u", score), ScorePos, ScoreFontSize, 0, BLACK);
 	DrawRectangleRounded(textBox, 0.5f, 0, LIGHTGRAY);
 	DrawRectangleRoundedLines(textBox, 0.5f, 0, 2.0f, MAROON);
 

@@ -187,7 +187,7 @@ void InGame::DrawScore(void)
 	ScoreDims = MeasureTextEx(Unifont, TextFormat("Score: %u", score), ScoreFontSize, 0);
 	ScorePos.x = GetScreenWidth()/2 - ScoreDims.x/2;
 	ScorePos.y = gridOffsetY - ScoreDims.y;
-	DrawTextEx(Unifont, TextFormat("Score: %d", score), ScorePos, ScoreFontSize, 0, RED);
+	DrawTextEx(Unifont, TextFormat("Score: %u", score), ScorePos, ScoreFontSize, 0, RED);
 }
 
 void InGame::DrawScoreToAdd(void)
@@ -196,7 +196,7 @@ void InGame::DrawScoreToAdd(void)
 	if (ScoreLifetime > 0)
 	{
 		ScoreToAddColor = ColorAlpha(WHITE, ScoreLifetime/1.5f);
-		DrawTextEx(Unifont, TextFormat("+%d", scoreToAdd), ScoreToAddPos, ScoreFontSize, 0, ScoreToAddColor);
+		DrawTextEx(Unifont, TextFormat("+%u", scoreToAdd), ScoreToAddPos, ScoreFontSize, 0, ScoreToAddColor);
 		ScoreToAddPos.y -= 2 * GetFrameTime() * 60;
 		ScoreLifetime -= GetFrameTime();
 	}
