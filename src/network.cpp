@@ -44,7 +44,7 @@ void ReadURL(void)
 	if (urlfile.is_open())
 	{
 		ServerURL.clear();
-		std::getline(urlfile, ServerURL);
+		urlfile >> ServerURL;
 		urlfile.close();
 	}
 	GetEndpoint = ServerURL + GetSuffix;
@@ -80,7 +80,9 @@ void PostScores(void)
 
 static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
 {
-	size_t realsize = size*nmemb; ((std::string*)userp)->append((char*)contents, realsize); return realsize;
+	size_t realsize = size*nmemb;
+	((std::string*)userp)->append((char*)contents, realsize);
+	return realsize;
 }
 
 std::string& GetScores(const unsigned int page)
