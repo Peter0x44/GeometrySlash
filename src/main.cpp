@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdint>
 #include <raylib.h>
-#include <unistd.h>
 #include "globals.h"
 #include "gamestate.h"
 #include "ingame.h"
