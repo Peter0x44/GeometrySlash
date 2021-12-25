@@ -41,13 +41,6 @@ int main(void)
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
 
-	for (int i = 0; i < 7; i++)
-	{
-		PlaySound(tones[i]);
-		sleep(1);
-	}
-	
-
 	CurrentState = new MainMenu();
 
 	// Main game loop

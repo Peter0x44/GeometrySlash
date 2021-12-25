@@ -66,6 +66,7 @@ void InGame::logic(void)
 		if (Chain.empty())
 		{
 			Chain.push_back(bruh{cursorX, cursorY});
+			PlaySound(tones[0]);
 		}
 		else if (Chain.size() > 1)
 		//if you hover over the second to last cell, pop it from the chain. Effectively, this allows going backwards.
@@ -73,6 +74,7 @@ void InGame::logic(void)
 			if ((Chain.rbegin()[1].x == cursorX) && (Chain.rbegin()[1].y == cursorY))
 			{
 				Chain.pop_back();
+				PlaySound(tones[(Chain.size() -1) % 7]); //TODO: make more tones
 			}
 		}
 		if (((std::abs(Chain.back().x  -  cursorX) <= 1) && (std::abs(Chain.back().y  -  cursorY) <= 1))
@@ -91,6 +93,7 @@ void InGame::logic(void)
 			// Only add to the chain if the color or shape is the same as the last in the chain
 			{
 				Chain.push_back(bruh{cursorX, cursorY});
+				PlaySound(tones[(Chain.size() - 1) % 7]); //TODO: make more tones
 			}
 		}
 	}
