@@ -31,5 +31,7 @@ extern char username[17];
 extern Texture2D tiles;
 extern Image icon;
 extern Font Unifont;
+extern Sound C3;
+extern Sound D3;
 
 #endif

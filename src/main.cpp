@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdint>
 #include <raylib.h>
+#include <unistd.h>
 #include "globals.h"
 #include "gamestate.h"
 #include "ingame.h"
@@ -12,6 +13,8 @@
 Texture2D tiles;
 Image icon;
 Font Unifont;
+Sound C3;
+Sound D3;
 
 GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
@@ -34,8 +37,15 @@ int main(void)
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	SetConfigFlags(FLAG_VSYNC_HINT);
 	InitWindow(screenWidth, screenHeight, "Geometry Slash");
+	InitAudioDevice();
+	SetWindowState(FLAG_WINDOW_ALWAYS_RUN); 	
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
+
+	PlaySound(C3);
+	sleep(1);
+	PlaySound(D3);
+
 
 	CurrentState = new MainMenu();
 
@@ -90,6 +100,9 @@ void LoadAssets(void)
 	SetTextureFilter(tiles, TEXTURE_FILTER_POINT);
 
 	Unifont = LoadFont("assets/Unifont.ttf");
+
+	C3 = LoadSound("assets/Tones/C3.wav");
+	D3 = LoadSound("assets/Tones/D3.wav");
 
 	CurlInit();
 	ReadURL();
