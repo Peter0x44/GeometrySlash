@@ -13,8 +13,7 @@
 Texture2D tiles;
 Image icon;
 Font Unifont;
-Sound C3;
-Sound D3;
+Sound tones[7];
 
 GameState* CurrentState = nullptr;
 GameStates StateID = GameStates::Null;
@@ -42,10 +41,12 @@ int main(void)
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
 
-	PlaySound(C3);
-	sleep(1);
-	PlaySound(D3);
-
+	for (int i = 0; i < 7; i++)
+	{
+		PlaySound(tones[i]);
+		sleep(1);
+	}
+	
 
 	CurrentState = new MainMenu();
 
@@ -101,8 +102,13 @@ void LoadAssets(void)
 
 	Unifont = LoadFont("assets/Unifont.ttf");
 
-	C3 = LoadSound("assets/Tones/C3.wav");
-	D3 = LoadSound("assets/Tones/D3.wav");
+	tones[0] = LoadSound("assets/Tones/C3.wav");
+	tones[1] = LoadSound("assets/Tones/D3.wav");
+	tones[2] = LoadSound("assets/Tones/E3.wav");
+	tones[3] = LoadSound("assets/Tones/F3.wav");
+	tones[4] = LoadSound("assets/Tones/G3.wav");
+	tones[5] = LoadSound("assets/Tones/A3.wav");
+	tones[6] = LoadSound("assets/Tones/B3.wav");
 
 	CurlInit();
 	ReadURL();
