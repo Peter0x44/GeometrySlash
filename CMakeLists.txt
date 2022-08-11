@@ -14,16 +14,16 @@ set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE) # don't build curl executable, only 
 set(HTTP_ONLY ON CACHE BOOL "" FORCE) # only http support is needed
 set(SSL_ENABLED ON)
 set(ENABLE_UNIX_SOCKETS OFF) # not needed, we only use TCP/IP
-set(CMAKE_USE_LIBSSH OFF) # not needed
-set(CMAKE_USE_LIBSSH2 OFF) # not needed
+set(CURL_USE_LIBSSH OFF) # not needed
+set(CURL_USE_LIBSSH2 OFF) # not needed
 set(CURL_DISABLE_CRYPTO_AUTH ON) # not needed (krb5, spnego)
 
 if(APPLE)
-	set(CMAKE_USE_SECTRANSP ON) # Deprecated darwinssl stuff from MacOS 10.3, no idea how to build with OpenSSL
+	set(CURL_USE_SECTRANSP ON) # Deprecated darwinssl stuff from MacOS 10.3, no idea how to build with OpenSSL
 endif()
 
 if(WIN32)
-	set(CMAKE_USE_SCHANNEL ON) # Required for HTTPS
+	set(CURL_USE_SCHANNEL ON) # Required for HTTPS
 endif()
 
 add_subdirectory(libs/raylib)
