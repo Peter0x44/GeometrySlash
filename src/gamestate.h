@@ -16,7 +16,13 @@ struct GameState
 {
 	virtual void logic(void) = 0;
 	virtual void render(void) = 0;
+
+	GameState(void) = default;
+	GameState(const GameState&) = delete; // no copy constructor
+	GameState& operator=(const GameState&) = delete; // no assignment operator
+
 	virtual ~GameState(){};
+
 };
 
 void ChangeState(void);
