@@ -1,3 +1,5 @@
+#ifdef SUPPORT_LEADERBOARD
+
 #include <curl/curl.h>
 #include <string>
 #include <fstream>
@@ -125,3 +127,5 @@ std::string& GetScores(const unsigned int page)
 	return response;
 }
 
+
+#endif

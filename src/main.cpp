@@ -102,8 +102,10 @@ void LoadAssets(void)
 	tones[5] = LoadSound("assets/Tones/A3.wav");
 	tones[6] = LoadSound("assets/Tones/B3.wav");
 
+#ifdef SUPPORT_LEADERBOARD
 	CurlInit();
 	ReadURL();
+#endif
 }
 
 void UnloadAssets(void)
@@ -112,5 +114,7 @@ void UnloadAssets(void)
 	UnloadTexture(tiles);
 	UnloadFont(Unifont);
 
+#ifdef SUPPORT_LEADERBOARD
 	CurlCleanup();
+#endif
 }

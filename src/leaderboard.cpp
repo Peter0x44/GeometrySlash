@@ -1,3 +1,5 @@
+#ifdef SUPPORT_LEADERBOARD
+
 #include <string>
 #include <cmath>
 #include <sstream>
@@ -89,7 +91,7 @@ void Leaderboard::render(void)
 	DrawLineEx(Vector2{Vline1.x, Vline1.y}, Vector2{Vline1.x, Vline1.y+Vline1.height}, 4.0f, DARKGRAY);
 	DrawLineEx(Vector2{Vline2.x, Vline2.y}, Vector2{Vline2.x, Vline2.y+Vline2.height}, 4.0f, DARKGRAY);
 	DrawTextEx(Unifont, TextFormat("%u of %u",currentPage+1, pageCount+1), Vector2{Backboard.x, Backboard.y+Backboard.height}, GetScreenHeight()/30, 0, LIGHTGRAY);
-	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f, 5.0f, MAROON);
+	DrawRectangleRoundedLines(PlayerBackboard, 0.5f, 90.0f*16.0f,/* 5.0f,*/ MAROON); // Review later, parameter "lineThick" was removed
 	const unsigned int positionWithinRequest = currentPage % 5 * scoresPerPage;
 	int scorePos = 0;
 	for (unsigned int i = positionWithinRequest; i < positionWithinRequest + scoresPerPage && i < usernames.size(); ++i) //Draw leaderboard scores
@@ -298,3 +300,5 @@ Leaderboard::~Leaderboard(void)
 	delete PrevPageButton;
 	delete NextPageButton;
 }
+
+#endif

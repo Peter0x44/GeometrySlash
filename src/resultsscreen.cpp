@@ -43,6 +43,7 @@ void ResultsScreen::logic(void)
 	{
 		SetNextState(GameStates::InGame);
 	}
+#ifdef SUPPORT_LEADERBOARD
 	else if (LeaderboardButton->clicked())
 	{
 		SetNextState(GameStates::Leaderboard);
@@ -51,6 +52,7 @@ void ResultsScreen::logic(void)
 	{
 		PostScores();
 	}
+#endif
 
 
 	// Code for Input box modified from Raylib example input box (https://github.com/raysan5/raylib/blob/master/examples/text/text_input_box.c)
@@ -88,7 +90,7 @@ void ResultsScreen::render(void)
 	DrawTextEx(Unifont, "Game Over", GameOverPos, GameOverFontSize, 0, MAROON);
 	DrawTextEx(Unifont, TextFormat("%u", score), ScorePos, ScoreFontSize, 0, BLACK);
 	DrawRectangleRounded(textBox, 0.5f, 0, LIGHTGRAY);
-	DrawRectangleRoundedLines(textBox, 0.5f, 0, 2.0f, MAROON);
+	DrawRectangleRoundedLines(textBox, 0.5f, 0, /*2.0f,*/ MAROON); // Review later, parameter "lineThick" removed
 
 	DrawTextEx(Unifont, username, Vector2{textBox.x + 5, textBox.y + 8}, UsernameFontSize, 0, MAROON);
 

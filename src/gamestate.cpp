@@ -25,9 +25,11 @@ void ChangeState(void)
 			case GameStates::ResultsScreen:
 				CurrentState = new ResultsScreen();
 				break;
+#ifdef SUPPORT_LEADERBOARD
 			case GameStates::Leaderboard:
 				CurrentState = new Leaderboard();
 				break;
+#endif
 			case GameStates::Null:
 				break;
 				// Should never happen, but lets kill the stupid warning anyway
