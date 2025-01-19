@@ -31,6 +31,12 @@ add_subdirectory(libs/raylib)
 
 target_link_libraries(GeometrySlash PRIVATE raylib)
 
+if(CMAKE_SYSTEM_NAME MATCHES "NintendoWii|NintendoGameCube")
+	find_package(SDL2 REQUIRED)
+	target_link_libraries(GeometrySlash PRIVATE SDL2::SDL2 SDL2::SDL2main aesnd opengx fat ogc m)
+endif()
+
+
 # only build libcurl if building with leaderboard support
 if (SUPPORT_LEADERBOARD)
 	set(BUILD_CURL_EXE OFF CACHE BOOL "" FORCE) # don't build curl executable, only library
