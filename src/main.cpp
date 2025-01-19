@@ -30,12 +30,18 @@ void ReadURL(void);
 // Implementation of these functions lies in network.cpp
 // Didn't feel like exposing them because it just wasn't necessary
 
-int main(void)
+#ifdef PLATFORM_DESKTOP_SDL
+#include "SDL_main.h"
+#endif
+
+int main(int argc, char** argv)
 {
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	SetConfigFlags(FLAG_VSYNC_HINT);
 	InitWindow(screenWidth, screenHeight, "Geometry Slash");
+#ifndef GEKKO
 	InitAudioDevice();
+#endif
 	SetWindowState(FLAG_WINDOW_ALWAYS_RUN); 	
 	SetWindowMinSize(screenWidth, screenHeight);
 	LoadAssets();
@@ -72,6 +78,9 @@ int main(void)
 
 			ClearBackground(DARKGRAY);
 			CurrentState->render();
+#ifdef GEKKO
+			DrawCircleV(GetMousePosition(), 5.0f, RED);
+#endif
 
 		EndDrawing();
 
@@ -94,6 +103,7 @@ void LoadAssets(void)
 
 	Unifont = LoadFont("assets/Unifont.ttf");
 
+#ifndef GEKKO
 	tones[0] = LoadSound("assets/Tones/C3.wav");
 	tones[1] = LoadSound("assets/Tones/D3.wav");
 	tones[2] = LoadSound("assets/Tones/E3.wav");
@@ -101,6 +111,7 @@ void LoadAssets(void)
 	tones[4] = LoadSound("assets/Tones/G3.wav");
 	tones[5] = LoadSound("assets/Tones/A3.wav");
 	tones[6] = LoadSound("assets/Tones/B3.wav");
+#endif
 
 #ifdef SUPPORT_LEADERBOARD
 	CurlInit();
@@ -113,6 +124,10 @@ void UnloadAssets(void)
 	UnloadImage(icon);
 	UnloadTexture(tiles);
 	UnloadFont(Unifont);
+
+#ifndef GEKKO
+	CloseAudioDevice();
+#endif
 
 #ifdef SUPPORT_LEADERBOARD
 	CurlCleanup();
